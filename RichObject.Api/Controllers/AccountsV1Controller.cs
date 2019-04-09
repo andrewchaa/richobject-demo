@@ -10,11 +10,11 @@ namespace RichObject.Api.Controllers
 {
     [Route("api/v1/accounts")]
     [ApiController]
-    public class AccountsController : ControllerBase
+    public class AccountsV1Controller : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public AccountsController(IMediator mediator)
+        public AccountsV1Controller(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -35,16 +35,6 @@ namespace RichObject.Api.Controllers
 
             var accountResponse = Mapper.Map<AccountResponse>(queryResponse.AccountDto);
             return Ok(accountResponse);
-        }
-    }
-
-    public class GetAccountDetailsQuery : IRequest<GetAccountDetailsQueryResponse>
-    {
-        public Guid AccountId { get; }
-
-        public GetAccountDetailsQuery(Guid accountId)
-        {
-            AccountId = accountId;
         }
     }
 
