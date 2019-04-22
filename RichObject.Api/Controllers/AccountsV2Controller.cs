@@ -32,12 +32,13 @@ namespace RichObject.Api.Controllers
             }
             
             var optionalAccount = await _mediator.Send(new GetAccountDetailsQuery(accountId));
-            if (!optionalAccount.HasValue)
-            {
-                return NotFound();
-            }
+//            if (!optionalAccount.HasValue)
+//            {
+//                return NotFound();
+//            }
             
-            return Ok(new AccountResponse(optionalAccount));
+//            return Ok(new AccountResponse(optionalAccount));
+            return Ok();
         }
     }
 
@@ -52,26 +53,4 @@ namespace RichObject.Api.Controllers
         public IEnumerable<string> ErrorMessages { get; set; }
     }
 
-    public class GetAccountDetailsQuery : IRequest<GetAccountDetailsQueryResponse>
-    {
-        public Guid AccountId { get; }
-
-        public GetAccountDetailsQuery(Guid accountId)
-        {
-            AccountId = accountId;
-        }
-    }
-
-    public class GetAccountDetailsQueryResponse
-    {
-        public IEnumerable<string> ValidationErrorMessages { get; set; }
-        public bool IsNotFound { get; set; }
-        public AccountDto AccountDto { get; set; }
-    }
-
-    public class AccountDto
-    {
-        public Guid Account { get; set; }
-        public string AccountName { get; set; }
-    }
 }

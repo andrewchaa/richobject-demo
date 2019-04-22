@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace RichObject.Api.Controllers
 {
@@ -22,19 +23,28 @@ namespace RichObject.Api.Controllers
         [HttpGet("{accountId}")]
         public async Task<ActionResult<AccountResponse>> Get(Guid accountId)
         {
-            var queryResponse = await _mediator.Send(new GetAccountDetailsQuery(accountId));
-            if (queryResponse.IsNotFound)
+            try
             {
-                return NotFound();
-            }
+                var queryResponse = await _mediator.Send(new GetAccountDetailsQuery(accountId));
+                if (queryResponse.IsNotFound)
+                {
+                    return NotFound();
+                }
 
-            if (queryResponse.ValidationErrorMessages.Any())
+                if (queryResponse.ValidationErrorMessages.Any())
+                {
+                    return BadRequest(queryResponse.ValidationErrorMessages);
+                }
+
+                var accountResponse = Mapper.Map<AccountResponse>(queryResponse.AccountDto);
+                return Ok(accountResponse);
+            }
+            catch (Exception e)
             {
-                return BadRequest(queryResponse.ValidationErrorMessages);
+                throw;
+                
             }
-
-            var accountResponse = Mapper.Map<AccountResponse>(queryResponse.AccountDto);
-            return Ok(accountResponse);
+           
         }
     }
 
