@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 
 namespace RichObject.Domain.Repositories
 {
-    public interface ICustomerRepositoryV3
+    public interface ICustomerRepositoryIss2
     {
-        Task<CustomerDataV2> Get(Guid customerId);
+        Task<CustomerDataIss2> Get(Guid customerId);
     }
-    
-    public class CustomerDataV2
+
+    public class CustomerDataIss2
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -17,10 +17,10 @@ namespace RichObject.Domain.Repositories
         public DateTime DateOfBirth { get; set; }
         public string IdDocumentType { get; set; }
         public string IdDocumentNumber { get; set; }
-        public IEnumerable<AddressDataV2> Addresses { get; set; }
+        public IEnumerable<AddressDataIss2> Addresses { get; set; }
     }
     
-    public class AddressDataV2
+    public class AddressDataIss2
     {
         public bool CurrentAddress { get; set; }
         public string HouseNoOrName { get; set; }
@@ -29,5 +29,4 @@ namespace RichObject.Domain.Repositories
         public string County { get; set; }
         public string PostCode { get; set; }
     }
-
 }

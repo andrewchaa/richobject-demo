@@ -8,16 +8,16 @@ using RichObject.Domain.Repositories;
 
 namespace RichObject.Data.Repositories
 {
-    public class CustomerRepositoryV1 : ICustomerRepositoryV1
+    public class CustomerRepositoryIss1 : ICustomerRepositoryIss1
     {
-        public async Task<CustomerV1> Get(Guid customerId)
+        public async Task<CustomerIss1> Get(Guid customerId)
         {
             using (var conn = new SqlConnection())
             {
-                var customer = await conn.QuerySingleOrDefaultAsync<CustomerV1>(
+                var customer = await conn.QuerySingleOrDefaultAsync<CustomerIss1>(
                     "SELECT * FROM Customers WHERE CustomerId = @customerId",
                     new {customerId});
-                customer.Addresses = await conn.QueryAsync<AddressV1>(
+                customer.Addresses = await conn.QueryAsync<AddressIss1>(
                     "SELECT * FROM Addresses WHERE Customer",
                     new {customerId});
 

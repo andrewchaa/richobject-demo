@@ -2,7 +2,7 @@ using System;
 
 namespace RichObject.Api.ApiModels
 {
-    public class CreateCustomerResponseV4
+    public class CreateCustomerResponseIss3
     {
         public Guid CustomerId { get; set; }
         public string FirstName { get; set; }

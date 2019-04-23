@@ -4,8 +4,8 @@ using RichObject.Domain.Models;
 
 namespace RichObject.Domain.Repositories
 {
-    public interface ICustomerRepositoryV1
+    public interface ICustomerRepositoryAns1
     {
-        Task<CustomerV1> Get(Guid customerId);
+        Task<CustomerAns1> Get(Guid customerId);
     }
 }

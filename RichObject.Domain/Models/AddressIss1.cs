@@ -1,6 +1,6 @@
 namespace RichObject.Domain.Models
 {
-    public class AddressV1
+    public class AddressIss1
     {
         public string HouseNoOrName { get; set; }
         public string Street { get; set; }

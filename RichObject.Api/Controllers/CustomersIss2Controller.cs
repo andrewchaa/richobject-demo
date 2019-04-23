@@ -12,23 +12,26 @@ using RichObject.Domain.Repositories;
 namespace RichObject.Api.Controllers
 {
     [ApiController]
-    public class CustomersV3Controller : Controller
+    public class CustomersIss2Controller : Controller
     {
-        private readonly ICustomerRepositoryV3 _customerRepository;
+        private readonly ICustomerRepositoryIss2 _customerRepository;
 
-        public CustomersV3Controller(ICustomerRepositoryV3 customerRepository)
+        public CustomersIss2Controller(ICustomerRepositoryIss2 customerRepository)
         {
             _customerRepository = customerRepository;
         }
         
         // GET
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetCustomerResponseV2>> Get(Guid id)
+        public async Task<ActionResult<GetCustomerResponseAns1>> Get(Guid id)
         {
             var customerData = await _customerRepository.Get(id);
-            var customer = Mapper.Map<CustomerV1>(customerData);
-            var customerResponse = Mapper.Map<GetCustomerResponseV2>(customer);
-
+            
+            // To use mapper, you leave public setters to your domain models
+            // Thus, every model becomes DTO
+            var customer = Mapper.Map<CustomerIss2>(customerData);
+            
+            var customerResponse = Mapper.Map<GetCustomerResponseIss2>(customer);
             
             return Ok(customerResponse);
         }

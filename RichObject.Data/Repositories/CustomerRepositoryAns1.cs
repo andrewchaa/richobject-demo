@@ -10,27 +10,27 @@ using RichObject.Domain.Repositories;
 
 namespace RichObject.Data.Repositories
 {
-    public class CustomerRepositoryV2 : ICustomerRepositoryV2
+    public class CustomerRepositoryAns1 : ICustomerRepositoryAns1
     {
-        public async Task<CustomerV2> Get(Guid customerId)
+        public async Task<CustomerAns1> Get(Guid customerId)
         {
             using (var conn = new SqlConnection())
             {
-                var customerData = await conn.QuerySingleOrDefaultAsync<CustomerDataV1>(
+                var customerData = await conn.QuerySingleOrDefaultAsync<CustomerDataAns1>(
                     "SELECT * FROM Customers WHERE CustomerId = @customerId",
                     new {customerId});
-                var addressesData = await conn.QueryAsync<AddressDataV1>(
+                var addressesData = await conn.QueryAsync<AddressDataAns1>(
                     "SELECT * FROM Addresses WHERE Customer",
                     new {customerId});
 
-                var addresses = addressesData.Select(a => new AddressV2(a.HouseNoOrName,
+                var addresses = addressesData.Select(a => new AddressAns1(a.HouseNoOrName,
                     a.Street,
                     a.City,
                     a.County,
                     a.PostCode,
                     a.CurrentAddress));
                 
-                return new CustomerV2(customerData.FirstName,
+                return new CustomerAns1(customerData.FirstName,
                     customerData.LastName,
                     customerData.Title,
                     customerData.DateOfBirth,
@@ -41,7 +41,7 @@ namespace RichObject.Data.Repositories
         }
     }
     
-    public class CustomerDataV1
+    public class CustomerDataAns1
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -51,7 +51,7 @@ namespace RichObject.Data.Repositories
         public string IdDocumentNumber { get; set; }
     }
     
-    public class AddressDataV1
+    public class AddressDataAns1
     {
         public bool CurrentAddress { get; set; }
         public string HouseNoOrName { get; set; }

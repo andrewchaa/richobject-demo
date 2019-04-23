@@ -11,11 +11,11 @@ namespace RichObject.Api.Controllers
 {
     [Route("api/v1/accounts")]
     [ApiController]
-    public class AccountsV1Controller : ControllerBase
+    public class AccountsIss1Controller : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public AccountsV1Controller(IMediator mediator)
+        public AccountsIss1Controller(IMediator mediator)
         {
             _mediator = mediator;
         }
