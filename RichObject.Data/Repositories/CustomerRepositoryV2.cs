@@ -14,10 +14,10 @@ namespace RichObject.Data.Repositories
         {
             using (var conn = new SqlConnection())
             {
-                var customerData = await conn.QuerySingleOrDefaultAsync<CustomerData>(
+                var customerData = await conn.QuerySingleOrDefaultAsync<CustomerDataV1>(
                     "SELECT * FROM Customers WHERE CustomerId = @customerId",
                     new {customerId});
-                var addressesData = await conn.QueryAsync<AddressData>(
+                var addressesData = await conn.QueryAsync<AddressDataV1>(
                     "SELECT * FROM Addresses WHERE Customer",
                     new {customerId});
 
@@ -39,7 +39,7 @@ namespace RichObject.Data.Repositories
         }
     }
     
-    public class CustomerData
+    public class CustomerDataV1
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -49,7 +49,7 @@ namespace RichObject.Data.Repositories
         public string IdDocumentNumber { get; set; }
     }
     
-    public class AddressData
+    public class AddressDataV1
     {
         public bool CurrentAddress { get; set; }
         public string HouseNoOrName { get; set; }

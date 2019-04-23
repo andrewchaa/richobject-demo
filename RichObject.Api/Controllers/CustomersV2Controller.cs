@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -32,11 +31,11 @@ namespace RichObject.Api.Controllers
                 Title = customer.Title,
                 CurrentAddress = new AddressResponse 
                 {
-                    HouseNoOrName = a.HouseNoOrName,
-                    Street = a.Street,
-                    City = a.City,
-                    County = a.County,
-                    PostCode = a.PostCode
+                    HouseNoOrName = currentAddress.HouseNoOrName,
+                    Street = currentAddress.Street,
+                    City = currentAddress.City,
+                    County = currentAddress.County,
+                    PostCode = currentAddress.PostCode
                 }, 
                 PastAddresses =  customer.Addresses.Where(a => !a.CurrentAddress)
                     .Select(a => new AddressResponse
@@ -55,17 +54,4 @@ namespace RichObject.Api.Controllers
             return Ok(customerResponse);
         }
     }
-    
-    public class CustomerResponse
-    {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Title { get; set; }
-        public IEnumerable<AddressResponse> PastAddresses { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public string IdDocumentType { get; set; }
-        public string IdDocumentNumber { get; set; }
-        public AddressResponse CurrentAddress { get; set; }
-    }
-
 }
