@@ -25,7 +25,8 @@ namespace RichObject.Data.Repositories
                     a.Street,
                     a.City,
                     a.County,
-                    a.PostCode));
+                    a.PostCode,
+                    a.CurrentAddress));
                 
                 return new CustomerV2(customerData.FirstName,
                     customerData.LastName,
@@ -50,6 +51,7 @@ namespace RichObject.Data.Repositories
     
     public class AddressData
     {
+        public bool CurrentAddress { get; set; }
         public string HouseNoOrName { get; set; }
         public string Street { get; set; }
         public string City { get; set; }

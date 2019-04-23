@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -22,12 +23,23 @@ namespace RichObject.Api.Controllers
         public async Task<ActionResult<CustomerResponse>> Get(Guid id)
         {
             var customer = await _customerRepository.Get(id);
+
+            var currentAddress = customer.Addresses.Single(a => a.CurrentAddress);
             var customerResponse = new CustomerResponse
             {
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
                 Title = customer.Title,
-                Addresses =  customer.Addresses.Select(a => new AddressResponse
+                CurrentAddress = new AddressResponse 
+                {
+                    HouseNoOrName = a.HouseNoOrName,
+                    Street = a.Street,
+                    City = a.City,
+                    County = a.County,
+                    PostCode = a.PostCode
+                }, 
+                PastAddresses =  customer.Addresses.Where(a => !a.CurrentAddress)
+                    .Select(a => new AddressResponse
                 {
                     HouseNoOrName = a.HouseNoOrName,
                     Street = a.Street,
@@ -43,4 +55,17 @@ namespace RichObject.Api.Controllers
             return Ok(customerResponse);
         }
     }
+    
+    public class CustomerResponse
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Title { get; set; }
+        public IEnumerable<AddressResponse> PastAddresses { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public string IdDocumentType { get; set; }
+        public string IdDocumentNumber { get; set; }
+        public AddressResponse CurrentAddress { get; set; }
+    }
+
 }
