@@ -1,4 +1,4 @@
-namespace RichObject.Domain
+namespace RichObject.Domain.Models
 {
     public class AddressV1
     {

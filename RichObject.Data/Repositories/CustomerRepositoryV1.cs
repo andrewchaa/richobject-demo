@@ -3,6 +3,8 @@ using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Dapper;
 using RichObject.Domain;
+using RichObject.Domain.Models;
+using RichObject.Domain.Repositories;
 
 namespace RichObject.Data.Repositories
 {

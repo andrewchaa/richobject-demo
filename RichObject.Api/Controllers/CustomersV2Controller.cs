@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RichObject.Api.ApiModels;
 using RichObject.Domain;
+using RichObject.Domain.Repositories;
 
 namespace RichObject.Api.Controllers
 {
@@ -19,12 +20,12 @@ namespace RichObject.Api.Controllers
         
         // GET
         [HttpGet("{id}")]
-        public async Task<ActionResult<CustomerResponse>> Get(Guid id)
+        public async Task<ActionResult<GetCustomerResponseV2>> Get(Guid id)
         {
             var customer = await _customerRepository.Get(id);
 
             var currentAddress = customer.Addresses.Single(a => a.CurrentAddress);
-            var customerResponse = new CustomerResponse
+            var customerResponse = new GetCustomerResponseV2
             {
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,

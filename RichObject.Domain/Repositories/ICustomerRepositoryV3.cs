@@ -1,9 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace RichObject.Domain
+namespace RichObject.Domain.Repositories
 {
     public interface ICustomerRepositoryV3
     {

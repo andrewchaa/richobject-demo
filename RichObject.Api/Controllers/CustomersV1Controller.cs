@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 using RichObject.Domain;
+using RichObject.Domain.Repositories;
 
 namespace RichObject.Api.Controllers
 {

@@ -1,7 +1,8 @@
 using System;
 using System.Threading.Tasks;
+using RichObject.Domain.Models;
 
-namespace RichObject.Domain
+namespace RichObject.Domain.Repositories
 {
     public interface ICustomerRepositoryV2
     {

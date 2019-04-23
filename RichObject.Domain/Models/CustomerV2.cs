@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace RichObject.Domain
+namespace RichObject.Domain.Models
 {
     public class CustomerV2
     {
