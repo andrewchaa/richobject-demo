@@ -48,21 +48,18 @@ namespace RichObject.Api.Controllers
             // command just wrap domain model
             var createCustomerCommand = new CreateCustomerCommandAns3(customer);
             
-            // command handler returns response that wraps domaon model
+            // command handler returns response that wraps domain model
             var response = await _mediator.Send(createCustomerCommand);
-//            if (response.ErrorType == ErrorType.ValidationError)
-//                return BadRequest(response.ErrorMessages);
-//
-//            if (response.ErrorType == ErrorType.Conflict)
-//            {
-//                // conversion from command response DTO to API response dto
-//                var customerConflictResponse = Mapper.Map<CreateCustomerResponseIss3>(response);
-//                return Conflict(customerConflictResponse);
-//            }
+            if (response.Result == OperationResult.ValidationFailure)
+                return BadRequest(response.ErrorMessages);
 
-            // conversion from command response DTO to API response dto
-            var customerResponse = Mapper.Map<CreateCustomerResponseIss3>(response);
-            return Ok(customerResponse);
+            var customerApiResponse = Mapper.Map<CreateCustomerResponseAns3>(response.Value);
+            if (response.Result == OperationResult.Conflict)
+            {
+                return Conflict(customerApiResponse);
+            }
+
+            return Ok(customerApiResponse);
         }
     }
 }

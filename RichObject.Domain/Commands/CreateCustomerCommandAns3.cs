@@ -6,7 +6,7 @@ using RichObject.Domain.Models;
 
 namespace RichObject.Domain.Commands
 {
-    public class CreateCustomerCommandAns3 : IRequest<CreateCustomerCommandResponseAns3>
+    public class CreateCustomerCommandAns3 : IRequest<OperationResponse<Guid>>
     {
         public CustomerAns3 Customer { get; }
 
