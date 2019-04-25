@@ -12,7 +12,7 @@ namespace RichObject.Data.Repositories
 {
     public class CustomerRepositoryAns1 : ICustomerRepositoryAns1
     {
-        public async Task<CustomerAns1> Get(Guid customerId)
+        public async Task<Customer1Ans> Get(Guid customerId)
         {
             using (var conn = new SqlConnection())
             {
@@ -30,7 +30,7 @@ namespace RichObject.Data.Repositories
                     a.PostCode,
                     a.CurrentAddress));
                 
-                return new CustomerAns1(customerData.FirstName,
+                return new Customer1Ans(customerData.FirstName,
                     customerData.LastName,
                     customerData.Title,
                     customerData.DateOfBirth,

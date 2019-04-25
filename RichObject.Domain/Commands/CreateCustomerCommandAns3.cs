@@ -8,9 +8,9 @@ namespace RichObject.Domain.Commands
 {
     public class CreateCustomerCommandAns3 : IRequest<OperationResponse<Guid>>
     {
-        public CustomerAns3 Customer { get; }
+        public Customer3Ans Customer { get; }
 
-        public CreateCustomerCommandAns3(CustomerAns3 customer)
+        public CreateCustomerCommandAns3(Customer3Ans customer)
         {
             Customer = customer;
         }

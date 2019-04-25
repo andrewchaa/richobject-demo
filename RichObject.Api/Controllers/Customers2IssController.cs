@@ -12,11 +12,11 @@ using RichObject.Domain.Repositories;
 namespace RichObject.Api.Controllers
 {
     [ApiController]
-    public class CustomersIss2Controller : Controller
+    public class Customers2IssController : Controller
     {
         private readonly ICustomerRepositoryIss2 _customerRepository;
 
-        public CustomersIss2Controller(ICustomerRepositoryIss2 customerRepository)
+        public Customers2IssController(ICustomerRepositoryIss2 customerRepository)
         {
             _customerRepository = customerRepository;
         }
@@ -29,7 +29,7 @@ namespace RichObject.Api.Controllers
             
             // To use mapper, you leave public setters to your domain models
             // Thus, every model becomes DTO
-            var customer = Mapper.Map<CustomerIss2>(customerData);
+            var customer = Mapper.Map<Customer2Iss>(customerData);
             
             var customerResponse = Mapper.Map<GetCustomerResponseIss2>(customer);
             

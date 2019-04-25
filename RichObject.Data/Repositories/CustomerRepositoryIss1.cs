@@ -10,11 +10,11 @@ namespace RichObject.Data.Repositories
 {
     public class CustomerRepositoryIss1 : ICustomerRepositoryIss1
     {
-        public async Task<CustomerIss1> Get(Guid customerId)
+        public async Task<Customer1Iss> Get(Guid customerId)
         {
             using (var conn = new SqlConnection())
             {
-                var customer = await conn.QuerySingleOrDefaultAsync<CustomerIss1>(
+                var customer = await conn.QuerySingleOrDefaultAsync<Customer1Iss>(
                     "SELECT * FROM Customers WHERE CustomerId = @customerId",
                     new {customerId});
                 customer.Addresses = await conn.QueryAsync<AddressIss1>(
