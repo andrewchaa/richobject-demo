@@ -17,6 +17,7 @@ namespace RichObject.Api.Controllers
     /// </summary>
     
     [ApiController]
+    [Route("api/[controller]")]
     public class Customers3AController : Controller
     {
         private readonly Mediator _mediator;
@@ -28,7 +29,7 @@ namespace RichObject.Api.Controllers
         
         // POST
         [HttpPost]
-        public async Task<ActionResult<Guid>> Post([FromBody] CustomerRequestAns3 customerRequest)
+        public async Task<IActionResult> Post([FromBody] CustomerRequestAns3 customerRequest)
         {
             // convert request DTO to domain model
             var customer = new Customer3A(customerRequest.FirstName,

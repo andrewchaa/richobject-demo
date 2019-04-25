@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RichObject.Domain;
 using RichObject.Domain.Repositories;
@@ -6,6 +7,7 @@ using RichObject.Domain.Repositories;
 namespace RichObject.Api.Controllers
 {
     [ApiController]
+    [Route("api/[controller]")]
     public class Customers1IController : Controller
     {
         private readonly ICustomerRepository1I _customerRepository;
@@ -17,9 +19,9 @@ namespace RichObject.Api.Controllers
         
         // GET
         [HttpGet("{id}")]
-        public IActionResult Get(Guid id)
+        public async Task<IActionResult> Get(Guid id)
         {
-            var customer = _customerRepository.Get(id);
+            var customer = await _customerRepository.Get(id);
             return Ok(customer);
         }
     }

@@ -19,6 +19,7 @@ namespace RichObject.Api.Controllers
     /// </summary>
     
     [ApiController]
+    [Route("api/[controller]")]
     public class Customers5IController : Controller
     {
         private readonly Mediator _mediator;

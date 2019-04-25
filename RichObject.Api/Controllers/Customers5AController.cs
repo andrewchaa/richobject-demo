@@ -15,6 +15,7 @@ using RichObject.Domain.Values;
 namespace RichObject.Api.Controllers
 {
     [ApiController]
+    [Route("api/[controller]")]
     public class Customers5AController : Controller
     {
         private readonly Mediator _mediator;

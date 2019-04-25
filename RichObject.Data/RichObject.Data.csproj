@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RichObject.Account\RichObject.Accounts.csproj" />
     <ProjectReference Include="..\RichObject.Domain\RichObject.Domain.csproj" />
   </ItemGroup>
 

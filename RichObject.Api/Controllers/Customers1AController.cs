@@ -9,6 +9,8 @@ using RichObject.Domain.Repositories;
 namespace RichObject.Api.Controllers
 {
     [ApiController]
+    [Route("api/[controller]")]
+
     public class Customers1AController : Controller
     {
         private readonly ICustomerRepository1A _customerRepository;
