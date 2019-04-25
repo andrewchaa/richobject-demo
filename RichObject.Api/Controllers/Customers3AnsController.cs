@@ -31,7 +31,7 @@ namespace RichObject.Api.Controllers
         public async Task<ActionResult<Guid>> Post([FromBody] CustomerRequestAns3 customerRequest)
         {
             // convert request DTO to domain model
-            var customer = new Customer3Ans(customerRequest.FirstName,
+            var customer = new Customer3A(customerRequest.FirstName,
                 customerRequest.LastName,
                 customerRequest.Title,
                 customerRequest.DateOfBirth,
@@ -46,7 +46,7 @@ namespace RichObject.Api.Controllers
                     )));
             
             // command just wrap domain model
-            var createCustomerCommand = new CreateCustomerCommandAns3(customer);
+            var createCustomerCommand = new CreateCustomerCommand3A(customer);
             
             // command handler returns response that wraps domain model
             var response = await _mediator.Send(createCustomerCommand);

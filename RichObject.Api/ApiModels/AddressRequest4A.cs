@@ -1,6 +1,6 @@
 namespace RichObject.Api.ApiModels
 {
-    public class AddressRequest4Iss
+    public class AddressRequest4A
     {
         public string HouseNoOrName { get; set; }
         public string Street { get; set; }

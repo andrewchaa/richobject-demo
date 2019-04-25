@@ -6,9 +6,9 @@ namespace RichObject.Domain.CommandHandlers
 {
     public class CreateCustomerCommandResponseAns3
     {
-        public Customer3Ans Customer { get; }
+        public Customer3A Customer { get; }
 
-        public CreateCustomerCommandResponseAns3(Customer3Ans customer)
+        public CreateCustomerCommandResponseAns3(Customer3A customer)
         {
             Customer = customer;
         }
