@@ -23,7 +23,7 @@ namespace RichObject.Data.Repositories
                     "SELECT * FROM Addresses WHERE Customer",
                     new {customerId});
 
-                var addresses = addressesData.Select(a => new AddressAns1(a.HouseNoOrName,
+                var addresses = addressesData.Select(a => new Address1A(a.HouseNoOrName,
                     a.Street,
                     a.City,
                     a.County,

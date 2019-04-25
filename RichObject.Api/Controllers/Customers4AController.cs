@@ -36,16 +36,16 @@ namespace RichObject.Api.Controllers
             var nameResponse = CustomerName.Create(request.Title,
                 request.FirstName,
                 request.LastName);
-            if (nameResponse.Result == OperationResult.ValidationFailure)
+            if (nameResponse.Status == OperationStatus.ValidationFailure)
                 return BadRequest(nameResponse.ErrorMessages);
 
             var dobResponse = Dob.Create(request.DateOfBirth);
-            if (dobResponse.Result == OperationResult.ValidationFailure)
+            if (dobResponse.Status == OperationStatus.ValidationFailure)
                 return BadRequest(dobResponse.ErrorMessages);
 
             var idDocumentResponse = IdDocument.Create(request.IdDocumentType,
                 request.IdDocumentNumber);
-            if (idDocumentResponse.Result == OperationResult.ValidationFailure)
+            if (idDocumentResponse.Status == OperationStatus.ValidationFailure)
                 return BadRequest(idDocumentResponse.ErrorMessages);
             
             // convert request DTO to domain model
@@ -53,7 +53,7 @@ namespace RichObject.Api.Controllers
                 nameResponse.Value,
                 dobResponse.Value,
                 idDocumentResponse.Value,
-                request.Addresses.Select(a => new AddressAns3(a.HouseNoOrName,
+                request.Addresses.Select(a => new Address3A(a.HouseNoOrName,
                     a.Street,
                     a.City,
                     a.County,
@@ -65,7 +65,7 @@ namespace RichObject.Api.Controllers
             var response = await _mediator.Send(new CreateCustomerCommand4A(customer));
 
             var apiResponse = Mapper.Map<CreateCustomerResponse3A>(response.Value);
-            if (response.Result == OperationResult.Conflict)
+            if (response.Status == OperationStatus.Conflict)
             {
                 return Conflict(apiResponse);
             }

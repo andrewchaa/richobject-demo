@@ -8,7 +8,7 @@ namespace RichObject.Domain.Models
     {
         public Guid CustomerId { get; }
         public CustomerName Name { get; }
-        public IEnumerable<AddressAns3> Addresses { get; }
+        public IEnumerable<Address3A> Addresses { get; }
         public Dob DateOfBirth { get; }
         public IdDocument IdDocument { get; }
 
@@ -16,7 +16,7 @@ namespace RichObject.Domain.Models
             CustomerName name, 
             Dob dateOfBirth, 
             IdDocument idDocument, 
-            IEnumerable<AddressAns3> addresses)
+            IEnumerable<Address3A> addresses)
         {
             this.CustomerId = CustomerId;
             Name = name;

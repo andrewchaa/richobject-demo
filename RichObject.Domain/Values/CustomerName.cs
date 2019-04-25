@@ -20,7 +20,7 @@ namespace RichObject.Domain.Values
         }
 
 
-        public static OperationResponse<CustomerName> Create(string title, 
+        public static OperationResult<CustomerName> Create(string title, 
             string firstName, 
             string lastName)
         {
@@ -34,10 +34,10 @@ namespace RichObject.Domain.Values
 
             if (errorMessages.Any())
             {
-                return OperationResponse<CustomerName>.ValidationFailure(errorMessages);
+                return OperationResult<CustomerName>.ValidationFailure(errorMessages);
             }
 
-            return OperationResponse<CustomerName>.Success(
+            return OperationResult<CustomerName>.Success(
                 new CustomerName(title, firstName, lastName));
 
         }

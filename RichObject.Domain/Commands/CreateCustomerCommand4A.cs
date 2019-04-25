@@ -4,7 +4,7 @@ using RichObject.Domain.Models;
 
 namespace RichObject.Domain.Commands
 {
-    public class CreateCustomerCommand4A : IRequest<OperationResponse<Guid>>
+    public class CreateCustomerCommand4A : IRequest<OperationResult<Guid>>
     {
         public Customer4A Customer { get; }
 

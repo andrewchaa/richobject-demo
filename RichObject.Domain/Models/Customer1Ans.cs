@@ -8,7 +8,7 @@ namespace RichObject.Domain.Models
         public string FirstName { get; }
         public string LastName { get; }
         public string Title { get; }
-        public IEnumerable<AddressAns1> Addresses { get; }
+        public IEnumerable<Address1A> Addresses { get; }
         public DateTime DateOfBirth { get; }
         public string IdDocumentType { get; }
         public string IdDocumentNumber { get; }
@@ -19,7 +19,7 @@ namespace RichObject.Domain.Models
             DateTime dateOfBirth, 
             string idDocumentType, 
             string idDocumentNumber, 
-            IEnumerable<AddressAns1> addresses)
+            IEnumerable<Address1A> addresses)
         {
             FirstName = firstName;
             LastName = lastName;

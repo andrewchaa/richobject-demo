@@ -18,13 +18,13 @@ namespace RichObject.Domain.Values
         }
 
 
-        public static OperationResponse<Dob> Create(DateTime dateOfBirth)
+        public static OperationResult<Dob> Create(DateTime dateOfBirth)
         {
             var dob = new Dob(dateOfBirth);
             if (dob.Age < 18)
-                return OperationResponse<Dob>.ValidationFailure(new [] {"The applicant's age must be at least 18"});
+                return OperationResult<Dob>.ValidationFailure(new [] {"The applicant's age must be at least 18"});
 
-            return OperationResponse<Dob>.Success(new Dob(dateOfBirth));
+            return OperationResult<Dob>.Success(new Dob(dateOfBirth));
         }
     }
 }

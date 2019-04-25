@@ -8,9 +8,9 @@ namespace RichObject.Api.Controllers
     [ApiController]
     public class Customers1IssController : Controller
     {
-        private readonly ICustomerRepositoryIss1 _customerRepository;
+        private readonly ICustomerRepository1I _customerRepository;
 
-        public Customers1IssController(ICustomerRepositoryIss1 customerRepository)
+        public Customers1IssController(ICustomerRepository1I customerRepository)
         {
             _customerRepository = customerRepository;
         }

@@ -37,7 +37,7 @@ namespace RichObject.Api.Controllers
                 customerRequest.DateOfBirth,
                 customerRequest.IdDocumentType,
                 customerRequest.IdDocumentNumber,
-                customerRequest.Addresses.Select(a => new AddressAns3(a.HouseNoOrName,
+                customerRequest.Addresses.Select(a => new Address3A(a.HouseNoOrName,
                     a.Street,
                     a.City,
                     a.County,
@@ -50,11 +50,11 @@ namespace RichObject.Api.Controllers
             
             // command handler returns response that wraps domain model
             var response = await _mediator.Send(createCustomerCommand);
-            if (response.Result == OperationResult.ValidationFailure)
+            if (response.Status == OperationStatus.ValidationFailure)
                 return BadRequest(response.ErrorMessages);
 
             var customerApiResponse = Mapper.Map<CreateCustomerResponse3A>(response.Value);
-            if (response.Result == OperationResult.Conflict)
+            if (response.Status == OperationStatus.Conflict)
             {
                 return Conflict(customerApiResponse);
             }

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace RichObject.Domain.Repositories
 {
-    public interface ICustomerRepositoryIss3
+    public interface ICustomerRepository3
     {
         Task<CustomerDataIss3> Get(Guid customerId);
     }

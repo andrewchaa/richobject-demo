@@ -9,7 +9,7 @@ using RichObject.Domain.Repositories;
 
 namespace RichObject.Data.Repositories
 {
-    public class CustomerRepositoryIss2 : ICustomerRepositoryIss2
+    public class CustomerRepository2I : ICustomerRepository2I
     {
         public async Task<CustomerDataIss2> Get(Guid customerId)
         {

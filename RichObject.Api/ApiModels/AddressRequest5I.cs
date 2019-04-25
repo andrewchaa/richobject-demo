@@ -1,11 +1,12 @@
-namespace RichObject.Domain.Models
+namespace RichObject.Api.ApiModels
 {
-    public class AddressIss1
+    public class AddressRequest5I
     {
         public string HouseNoOrName { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
         public string County { get; set; }
         public string PostCode { get; set; }
+        public bool CurrentAddress { get; set; }
     }
 }

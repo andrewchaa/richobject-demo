@@ -1,6 +1,6 @@
 namespace RichObject.Domain.Models
 {
-    public class AddressAns3
+    public class Address1A
     {
         public string HouseNoOrName { get; }
         public string Street { get; }
@@ -9,7 +9,7 @@ namespace RichObject.Domain.Models
         public string PostCode { get; }
         public bool CurrentAddress { get;  }
 
-        public AddressAns3(string houseNoOrName, 
+        public Address1A(string houseNoOrName, 
             string street, 
             string city, 
             string county, 

@@ -16,7 +16,7 @@ namespace RichObject.Domain.Values
             DocumentNumber = documentNumber;
         }
 
-        public static OperationResponse<IdDocument> Create(string idDocumentType, 
+        public static OperationResult<IdDocument> Create(string idDocumentType, 
             string idDocumentNumber)
         {
             var errorMessages = new List<string>();
@@ -29,13 +29,13 @@ namespace RichObject.Domain.Values
 
             if (errorMessages.Any())
             {
-                return OperationResponse<IdDocument>.ValidationFailure(errorMessages);
+                return OperationResult<IdDocument>.ValidationFailure(errorMessages);
             }
 
 
             Enum.TryParse(idDocumentType, out IdDocumentType docType);
 
-            return OperationResponse<IdDocument>.Success(new IdDocument(docType, 
+            return OperationResult<IdDocument>.Success(new IdDocument(docType, 
                 idDocumentNumber));
         }
     }
