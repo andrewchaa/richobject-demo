@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RichObject.Domain.Models
 {
-    public class Customer1Ans
+    public class Customer5I
     {
         public string FirstName { get; }
         public string LastName { get; }
@@ -13,7 +13,7 @@ namespace RichObject.Domain.Models
         public string IdDocumentType { get; }
         public string IdDocumentNumber { get; }
 
-        public Customer1Ans(string firstName, 
+        public Customer5I(string firstName, 
             string lastName, 
             string title, 
             DateTime dateOfBirth, 

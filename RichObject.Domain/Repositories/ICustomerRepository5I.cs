@@ -6,8 +6,8 @@ namespace RichObject.Domain.Repositories
 {
     public interface ICustomerRepository5I
     {
-        Task<Customer1Ans> Get(Guid customerId);
-        Task<Guid> Save(Customer4A customer);
+        Task<Customer5I> Get(Guid customerId);
+        Task<Guid> Save(Customer5I customer);
         Task<bool> Exist(Guid customerCustomerId);
     }
 }

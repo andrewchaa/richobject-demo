@@ -7,20 +7,20 @@ using RichObject.Domain.Repositories;
 
 namespace RichObject.Domain.CommandHandlers
 {
-    public class ChangeCustomerCurrentAddressCommandHandler5I : 
-        IRequestHandler<ChangeCustomerCurrentAddressCommand5I, OperationResult<Unit>>
+    public class ChangeCurrentAddressCommandHandler5I : 
+        IRequestHandler<ChangeCurrentAddressCommand5I, OperationResult<Unit>>
     {
         private readonly ICustomerRepository5I _customerRepository;
-        private readonly IAddresRepository5I _addressRepository;
+        private readonly IAddressRepository5I _addressRepository;
 
-        public ChangeCustomerCurrentAddressCommandHandler5I(ICustomerRepository5I customerRepository,
-            IAddresRepository5I addressRepository)
+        public ChangeCurrentAddressCommandHandler5I(ICustomerRepository5I customerRepository,
+            IAddressRepository5I addressRepository)
         {
             _customerRepository = customerRepository;
             _addressRepository = addressRepository;
         }
         
-        public async Task<OperationResult<Unit>> Handle(ChangeCustomerCurrentAddressCommand5I command, 
+        public async Task<OperationResult<Unit>> Handle(ChangeCurrentAddressCommand5I command, 
             CancellationToken cancellationToken)
         {
             var exist = await _customerRepository.Exist(command.CustomerId);

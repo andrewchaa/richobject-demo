@@ -4,11 +4,11 @@ using RichObject.Domain.Models;
 
 namespace RichObject.Domain.CommandHandlers
 {
-    public class CreateCustomerCommandResponseAns3
+    public class CreateCustomerCommandResponse3A
     {
         public Customer3A Customer { get; }
 
-        public CreateCustomerCommandResponseAns3(Customer3A customer)
+        public CreateCustomerCommandResponse3A(Customer3A customer)
         {
             Customer = customer;
         }

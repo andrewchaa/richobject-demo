@@ -9,11 +9,11 @@ using RichObject.Domain.Repositories;
 namespace RichObject.Api.Controllers
 {
     [ApiController]
-    public class Customers1AnsController : Controller
+    public class Customers1AController : Controller
     {
         private readonly ICustomerRepository1A _customerRepository;
 
-        public Customers1AnsController(ICustomerRepository1A customerRepository)
+        public Customers1AController(ICustomerRepository1A customerRepository)
         {
             _customerRepository = customerRepository;
         }

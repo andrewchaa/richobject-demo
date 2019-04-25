@@ -6,6 +6,6 @@ namespace RichObject.Domain.Repositories
 {
     public interface ICustomerRepository1A
     {
-        Task<Customer1Ans> Get(Guid customerId);
+        Task<Customer1A> Get(Guid customerId);
     }
 }

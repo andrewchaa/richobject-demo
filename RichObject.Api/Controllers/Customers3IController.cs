@@ -17,11 +17,11 @@ namespace RichObject.Api.Controllers
     /// </summary>
     
     [ApiController]
-    public class Customers3IssController : Controller
+    public class Customers3IController : Controller
     {
         private readonly Mediator _mediator;
 
-        public Customers3IssController(Mediator mediator)
+        public Customers3IController(Mediator mediator)
         {
             _mediator = mediator;
         }

@@ -14,26 +14,22 @@ using RichObject.Domain.Values;
 
 namespace RichObject.Api.Controllers
 {
-    /// <summary>
-    /// Transaction Scripts
-    /// </summary>
-    
     [ApiController]
-    public class Customers5IController : Controller
+    public class Customers5AController : Controller
     {
         private readonly Mediator _mediator;
 
-        public Customers5IController(Mediator mediator)
+        public Customers5AController(Mediator mediator)
         {
             _mediator = mediator;
         }
         
-        [HttpPut("{id}/currentAddress")]
-        public async Task<ActionResult<Guid>> Put([FromRoute]Guid id, 
+        [HttpPut("{customerId}/currentAddress")]
+        public async Task<IActionResult> Put([FromRoute]Guid customerId, 
             [FromBody] AddressRequest5I request)
         {
             // value objects validate their inputs
-            var addressResult = Address5I.Create(Guid.NewGuid(), 
+            var addressResult = Address5A.Create(Guid.NewGuid(), 
                 request.HouseNoOrName,
                 request.Street,
                 request.City,
@@ -45,10 +41,10 @@ namespace RichObject.Api.Controllers
                 return BadRequest(addressResult.ErrorMessages);
 
             // command handler owns the business logic that updates the customer's current address
-            var response = await _mediator.Send(new ChangeCurrentAddressCommand5I(id,
+            var response = await _mediator.Send(new ChangeCurrentAddressCommand5A(customerId,
                 addressResult.Value));
             if (response.Status == OperationStatus.NotFound)
-                return NotFound(id);
+                return NotFound(customerId);
 
             return NoContent();
         }

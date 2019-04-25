@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RichObject.Domain.Models
 {
-    public class Customer1Iss
+    public class Customer2I
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

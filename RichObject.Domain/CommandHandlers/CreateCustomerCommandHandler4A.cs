@@ -7,12 +7,12 @@ using RichObject.Domain.Repositories;
 
 namespace RichObject.Domain.CommandHandlers
 {
-    public class CreateCustomerCommandHandlerA4 : IRequestHandler<CreateCustomerCommand4A, 
+    public class CreateCustomerCommandHandler4A : IRequestHandler<CreateCustomerCommand4A, 
         OperationResult<Guid>>
     {
         private readonly ICustomerRepository4A _customerRepository;
 
-        public CreateCustomerCommandHandlerA4(ICustomerRepository4A customerRepository)
+        public CreateCustomerCommandHandler4A(ICustomerRepository4A customerRepository)
         {
             _customerRepository = customerRepository;
         }
