@@ -49,7 +49,8 @@ namespace RichObject.Api.Controllers
                 return BadRequest(idDocumentResponse.ErrorMessages);
             
             // convert request DTO to domain model
-            var customer = new Customer4A(nameResponse.Value,
+            var customer = new Customer4A(request.CustomerId,
+                nameResponse.Value,
                 dobResponse.Value,
                 idDocumentResponse.Value,
                 request.Addresses.Select(a => new AddressAns3(a.HouseNoOrName,
@@ -61,20 +62,15 @@ namespace RichObject.Api.Controllers
                 )));
             
             // command just wrap domain model
-            var createCustomerCommand = new CreateCustomerCommand4A(customer);
-            
-            // command handler returns response that wraps domain model
-            var response = await _mediator.Send(createCustomerCommand);
-            if (response.Result == OperationResult.ValidationFailure)
-                return BadRequest(response.ErrorMessages);
+            var response = await _mediator.Send(new CreateCustomerCommand4A(customer));
 
-            var customerApiResponse = Mapper.Map<CreateCustomerResponseAns3>(response.Value);
+            var apiResponse = Mapper.Map<CreateCustomerResponse3A>(response.Value);
             if (response.Result == OperationResult.Conflict)
             {
-                return Conflict(customerApiResponse);
+                return Conflict(apiResponse);
             }
 
-            return Created($"/customers/customer/{customerApiResponse.CustomerId}", customerApiResponse);
+            return Created($"/customers/customer/{apiResponse.CustomerId}", apiResponse);
         }
     }
 }

@@ -1,8 +1,10 @@
+using System;
 using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using RichObject.Domain.Models;
 
 namespace RichObject.Domain.Commands
@@ -36,6 +38,13 @@ namespace RichObject.Domain.Commands
             return new OperationResponse<T>(OperationResult.Success,
                 new List<string>(), 
                 value);
+        }
+
+        public static OperationResponse<T> Conflict()
+        {
+            return new OperationResponse<T>(OperationResult.Conflict,
+                new [] { "The given resource already exists"},
+                default(T));
         }
     }
 }
