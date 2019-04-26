@@ -20,9 +20,9 @@ namespace RichObject.Api.Controllers
     [Route("api/[controller]")]
     public class Customers3AController : Controller
     {
-        private readonly Mediator _mediator;
+        private readonly IMediator _mediator;
 
-        public Customers3AController(Mediator mediator)
+        public Customers3AController(IMediator mediator)
         {
             _mediator = mediator;
         }

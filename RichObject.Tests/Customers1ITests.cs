@@ -3,7 +3,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Moq;
@@ -14,36 +13,27 @@ using Xunit;
 
 namespace RichObject.Tests
 {
-    public class Customers1ITests : IClassFixture<WebApplicationFactory<Startup>>
+    public class Customers1ITests : IClassFixture<TestApiFactory>
     {
-        private readonly WebApplicationFactory<Startup> _factory;
-        private HttpClient _client;
+        private readonly TestApiFactory _factory;
+        private readonly HttpClient _client;
 
-        public Customers1ITests(WebApplicationFactory<Startup> factory)
+        public Customers1ITests(TestApiFactory factory)
         {
             _factory = factory;
+            _client = _factory.CreateClient();
 
-            var customerRepository1I = new Mock<ICustomerRepository1I>();
-            customerRepository1I.Setup(c => c.Get(It.IsAny<Guid>()))
+            _factory.CustomerRepository1I.Setup(c => c.Get(It.IsAny<Guid>()))
                 .ReturnsAsync(new Customer1I());
 
-
-            _factory.WithWebHostBuilder(b => b.ConfigureServices(services =>
-                {
-                    services.AddTransient(s => customerRepository1I.Object);
-                }
-            ));
-            
-            _client = _factory.CreateClient();
-            
         }
         
         [Fact]
-        public async Task Test1()
+        public async Task Should_get_the_customer_by_id()
         {
             var response = await _client.GetAsync($"/api/customers1i/{Guid.NewGuid()}");
             
-            Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace RichObject.Api.Controllers
         
         // GET
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetCustomerResponseAns1>> Get(Guid id)
+        public async Task<ActionResult<GetCustomerResponse1A>> Get(Guid id)
         {
             var customerData = await _customerRepository.Get(id);
             

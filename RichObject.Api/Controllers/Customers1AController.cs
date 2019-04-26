@@ -22,12 +22,12 @@ namespace RichObject.Api.Controllers
         
         // GET
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetCustomerResponseAns1>> Get(Guid id)
+        public async Task<ActionResult<GetCustomerResponse1A>> Get(Guid id)
         {
             var customer = await _customerRepository.Get(id);
 
             var currentAddress = customer.Addresses.Single(a => a.CurrentAddress);
-            var customerResponse = new GetCustomerResponseAns1
+            var customerResponse = new GetCustomerResponse1A
             {
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,

@@ -30,7 +30,8 @@ namespace RichObject.Data.Repositories
                     a.PostCode,
                     a.CurrentAddress));
                 
-                return new Customer1A(customerData.FirstName,
+                return new Customer1A(customerData.CustomerId, 
+                    customerData.FirstName,
                     customerData.LastName,
                     customerData.Title,
                     customerData.DateOfBirth,
@@ -49,6 +50,7 @@ namespace RichObject.Data.Repositories
         public DateTime DateOfBirth { get; set; }
         public string IdDocumentType { get; set; }
         public string IdDocumentNumber { get; set; }
+        public Guid CustomerId { get; set; }
     }
     
     public class AddressData1A
