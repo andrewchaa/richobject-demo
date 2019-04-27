@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RichObject.Domain;
+using RichObject.Domain.Models;
 using RichObject.Domain.Repositories;
 
 namespace RichObject.Api.Controllers
@@ -19,7 +20,7 @@ namespace RichObject.Api.Controllers
         
         // GET
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(Guid id)
+        public async Task<ActionResult<Customer1I>> Get(Guid id)
         {
             var customer = await _customerRepository.Get(id);
             return Ok(customer);

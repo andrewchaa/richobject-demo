@@ -32,7 +32,7 @@ namespace RichObject.Api.Controllers
         public async Task<ActionResult<Guid>> Post([FromBody] CustomerRequestIss3 customerRequest)
         {
             // from request DTO to command DTO
-            var createCustomerCommand = Mapper.Map<CreateCustomerCommandIss3>(customerRequest);
+            var createCustomerCommand = Mapper.Map<CreateCustomerCommand3I>(customerRequest);
             
             // from command DTO to command handler response DTO
             var response = await _mediator.Send(createCustomerCommand);

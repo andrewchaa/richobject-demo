@@ -28,10 +28,11 @@ namespace RichObject.Api.Controllers
         {
             var customerData = await _customerRepository.Get(id);
             
-            // To use mapper, you leave public setters to your domain models
-            // Thus, every model becomes DTO
+            // Often the repository is used in multiple places and you have to do the same conversion
+            // In stead of hurrying to use mapper, let's ask why we do the same thing in that many places 
             var customer = Mapper.Map<Customer2I>(customerData);
             
+            // sometimes, you skip the domain model and jump from data model to api response model
             var customerResponse = Mapper.Map<GetCustomerResponseIss2>(customer);
             
             return Ok(customerResponse);

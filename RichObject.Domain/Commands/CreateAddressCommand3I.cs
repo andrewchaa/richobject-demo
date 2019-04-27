@@ -1,6 +1,6 @@
 namespace RichObject.Domain.Commands
 {
-    public class CreateAddressCommandV4
+    public class CreateAddressCommand3I
     {
         public string HouseNoOrName { get; set; }
         public string Street { get; set; }

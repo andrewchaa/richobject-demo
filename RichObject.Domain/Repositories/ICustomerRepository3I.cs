@@ -4,12 +4,13 @@ using System.Threading.Tasks;
 
 namespace RichObject.Domain.Repositories
 {
-    public interface ICustomerRepository3
+    public interface ICustomerRepository3I
     {
-        Task<CustomerDataIss3> Get(Guid customerId);
+        Task<CustomerData3I> Get(Guid customerId);
+        Task<CustomerData3I> Insert(CustomerData3I customerData);
     }
     
-    public class CustomerDataIss3
+    public class CustomerData3I
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

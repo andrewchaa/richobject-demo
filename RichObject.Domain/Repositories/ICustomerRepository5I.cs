@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using RichObject.Domain.Commands;
 using RichObject.Domain.Models;
 
 namespace RichObject.Domain.Repositories
