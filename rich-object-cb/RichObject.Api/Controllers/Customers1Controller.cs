@@ -1,9 +1,10 @@
 using System.Threading.Tasks;
 using AutoMapper;
-using FluentValidation;
+using FluentValidation.Validators;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RichObject.Api.ApiModels;
+using RichObject.Api.Validators;
 using RichObject.Domain.Commands;
 
 namespace RichObject.Api.Controllers
@@ -13,6 +14,7 @@ namespace RichObject.Api.Controllers
     /// Command DTO
     /// Command Response DTO
     /// Use of Mapper
+    /// Use of Validation Scripts
     /// </summary>
     [ApiController]
     [Route("api/[controller]")]
@@ -36,6 +38,7 @@ namespace RichObject.Api.Controllers
 
             // command handler returns response that wraps domain model
             var createCustomerCommandResponse = await _mediator.Send(createCustomerCommand);
+            
             if (createCustomerCommandResponse.Result == OperationStatus.ValidationFailure)
                 return BadRequest(createCustomerCommandResponse.ErrorMessages);
 
@@ -43,22 +46,6 @@ namespace RichObject.Api.Controllers
                 return Conflict(createCustomerCommandResponse);
 
             return Ok(createCustomerCommandResponse.CustomerId);
-        }
-    }
-
-    public class CreateCustomerValidator : AbstractValidator<CreateCustomerRequest1>
-    {
-        public CreateCustomerValidator()
-        {
-            RuleFor(x => x.CountryOfBirth).NotEmpty();
-            RuleFor(x => x.DateOfBirth).NotEmpty();
-            RuleFor(x => x.FirstName).NotEmpty();
-            RuleFor(x => x.LastName).NotEmpty();
-            RuleFor(x => x.Title).NotEmpty();
-            RuleFor(x => x.IdDocumentNumber).NotEmpty();
-            RuleFor(x => x.IdDocumentType).NotEmpty();
-            RuleFor(x => x.VatCountry).NotEmpty();
-            RuleFor(x => x.VatNumber).NotEmpty();
         }
     }
 }
