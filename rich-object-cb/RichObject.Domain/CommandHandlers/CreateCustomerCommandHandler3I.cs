@@ -11,7 +11,7 @@ using RichObject.Domain.Repositories;
 namespace RichObject.Domain.CommandHandlers
 {
     public class CreateCustomerCommandHandler3I : 
-        IRequestHandler<CreateCustomerCommand3I, CreateCustomerCommandResponse3I>
+        IRequestHandler<CreateCustomerCommand1, CreateCustomerCommandResponse3I>
     {
         private readonly ICustomerRepository3I _customerRepository;
 
@@ -20,7 +20,7 @@ namespace RichObject.Domain.CommandHandlers
             _customerRepository = customerRepository;
         }
         
-        public async Task<CreateCustomerCommandResponse3I> Handle(CreateCustomerCommand3I command, 
+        public async Task<CreateCustomerCommandResponse3I> Handle(CreateCustomerCommand1 command, 
             CancellationToken cancellationToken)
         {
             var response = new CreateCustomerCommandResponse3I();

@@ -60,23 +60,23 @@ namespace RichObject.Tests
         [Fact]
         public async Task Should_creat_a_new_customer()
         {
-            var request = new CustomerRequestAns3
+            var request = new CustomerRequest1
             {
                 FirstName = "firstName",
                 LastName = "lastName",
                 Title = "title",
-                Addresses = new List<AddressRequestAns3>
-                {
-                    new AddressRequestAns3
-                    {
-                        City = "city",
-                        County = "county",
-                        CurrentAddress = true,
-                        HouseNoOrName = "4",
-                        PostCode = "E4",
-                        Street = "Liverpool Street"
-                    }
-                },
+//                Address = new List<AddressRequestAns3>
+//                {
+//                    new AddressRequestAns3
+//                    {
+//                        City = "city",
+//                        County = "county",
+//                        CurrentAddress = true,
+//                        HouseNoOrName = "4",
+//                        PostCode = "E4",
+//                        Street = "Liverpool Street"
+//                    }
+//                },
                 DateOfBirth = new DateTime(2000, 1, 1),
                 IdDocumentType = "Passport",
                 IdDocumentNumber = "1010101"
