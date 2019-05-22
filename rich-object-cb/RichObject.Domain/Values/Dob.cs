@@ -1,5 +1,6 @@
 using System;
 using RichObject.Domain.Commands;
+using RichObject.Domain.Infrastructure;
 
 namespace RichObject.Domain.Values
 {

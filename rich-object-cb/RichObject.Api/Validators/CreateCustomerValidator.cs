@@ -3,7 +3,7 @@ using RichObject.Api.ApiModels;
 
 namespace RichObject.Api.Validators
 {
-    public class CreateCustomerValidator : AbstractValidator<CreateCustomerRequest1>
+    public class CreateCustomerValidator : AbstractValidator<CreateCustomerRequest>
     {
         public CreateCustomerValidator()
         {
@@ -17,7 +17,7 @@ namespace RichObject.Api.Validators
             RuleFor(x => x.VatCountry).NotEmpty().When(x => !string.IsNullOrEmpty(x.VatNumber));
             RuleFor(x => x.VatNumber).NotEmpty().When(x => !string.IsNullOrEmpty(x.VatCountry));
 
-            RuleForEach(x => x.Addresses).SetValidator(new AddressValidator());
+            RuleFor(x => x.Address).SetValidator(new AddressValidator());
         }
     }
 }

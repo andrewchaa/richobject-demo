@@ -6,11 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using RichObject.Api.ApiModels;
 using RichObject.Api.Validators;
 using RichObject.Domain.Commands;
+using RichObject.Domain.Infrastructure;
+using RichObject.Domain.Models;
 
 namespace RichObject.Api.Controllers
 {
     /// <summary>
-    /// Request DTO
     /// Introduce Domain Model and let Command wrap it
     /// Command Response DTO
     /// Use of Mapper
@@ -29,23 +30,46 @@ namespace RichObject.Api.Controllers
         
         // POST
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateCustomerRequest1 request)
+        public async Task<IActionResult> Post([FromBody] CreateCustomerRequest request)
         {
             var validator = new CreateCustomerValidator();
+            var result = validator.Validate(request);
+            if (!result.IsValid)
+                return BadRequest(result.Errors);
 
-            // convert request DTO to command DTO
-            var createCustomerCommand = Mapper.Map<CreateCustomerCommand1>(request);
+            var address = Address2.Create(request.Address.HouseNoOrName,
+                request.Address.Street,
+                request.Address.City,
+                request.Address.County,
+                request.Address.PostCode
+            );
+
+            var customer = Customer2.Create(request.CustomerId, 
+                request.FirstName,
+                request.LastName,
+                request.MiddleName,
+                request.Title,
+                address,
+                request.DateOfBirth,
+                request.CountryOfBirth,
+                request.IdDocumentType,
+                request.IdDocumentNumber,
+                request.VatNumber,
+                request.VatCountry);
+
+            // wrap customer domain model
+            var createCustomerCommand = new CreateCustomerCommand2(customer);
 
             // command handler returns response that wraps domain model
-            var createCustomerCommandResponse = await _mediator.Send(createCustomerCommand);
-            
-            if (createCustomerCommandResponse.Result == OperationStatus.ValidationFailure)
-                return BadRequest(createCustomerCommandResponse.ErrorMessages);
+            var response = await _mediator.Send(createCustomerCommand);
 
-            if (createCustomerCommandResponse.Result == OperationStatus.Conflict)
-                return Conflict(createCustomerCommandResponse);
+            if (response.Status == OperationStatus.ValidationFailure)
+                return BadRequest(response.ErrorMessages);
 
-            return Ok(createCustomerCommandResponse.CustomerId);
+            if (response.Status == OperationStatus.Conflict)
+                return Conflict(response);
+
+            return Ok(response.Value);
         }
     }
 }

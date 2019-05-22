@@ -1,4 +1,4 @@
-namespace RichObject.Domain.Commands
+namespace RichObject.Domain.Infrastructure
 {
     public enum OperationStatus
     {

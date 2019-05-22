@@ -19,16 +19,16 @@ namespace RichObject.Data.Repositories
                 var customerData = await conn.QuerySingleOrDefaultAsync<CustomerData1A>(
                     "SELECT * FROM Customers WHERE CustomerId = @customerId",
                     new {customerId});
-                var addressesData = await conn.QueryAsync<AddressData1A>(
-                    "SELECT * FROM Addresses WHERE Customer",
+                var addressesData = await conn.QuerySingleOrDefaultAsync<AddressData1A>(
+                    "SELECT * FROM Addresses WHERE CustomerId = @customerId",
                     new {customerId});
 
-                var addresses = addressesData.Select(a => new Address1A(a.HouseNoOrName,
-                    a.Street,
-                    a.City,
-                    a.County,
-                    a.PostCode,
-                    a.CurrentAddress));
+                var address = Address2.Create(addressesData.HouseNoOrName,
+                    addressesData.Street,
+                    addressesData.City,
+                    addressesData.County,
+                    addressesData.PostCode
+                    );
                 
                 return new Customer1A(customerData.CustomerId, 
                     customerData.FirstName,
@@ -37,7 +37,7 @@ namespace RichObject.Data.Repositories
                     customerData.DateOfBirth,
                     customerData.IdDocumentType,
                     customerData.IdDocumentNumber,
-                    addresses);
+                    address);
             }
         }
     }

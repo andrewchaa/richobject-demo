@@ -3,7 +3,7 @@ using RichObject.Api.ApiModels;
 
 namespace RichObject.Api.Validators
 {
-    public class AddressValidator : AbstractValidator<AddressRequest1>
+    public class AddressValidator : AbstractValidator<AddressRequest>
     {
         public AddressValidator()
         {

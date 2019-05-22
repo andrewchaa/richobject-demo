@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using RichObject.Api.ApiModels;
 using RichObject.Domain;
 using RichObject.Domain.Commands;
+using RichObject.Domain.Infrastructure;
 using RichObject.Domain.Models;
 using RichObject.Domain.Repositories;
 using RichObject.Domain.Values;
@@ -59,8 +60,9 @@ namespace RichObject.Api.Controllers
                     a.City,
                     a.County,
                     a.PostCode,
-                    a.CurrentAddress
-                )));
+                    true
+                )
+                ));
             
             // command just wrap domain model
             var response = await _mediator.Send(new CreateCustomerCommand4A(customer));
