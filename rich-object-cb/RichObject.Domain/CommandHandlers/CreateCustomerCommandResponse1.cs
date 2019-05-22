@@ -16,7 +16,7 @@ namespace RichObject.Domain.CommandHandlers
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Title { get; set; }
-        public IEnumerable<CreateAddressCommandResponseV4> Addresses { get; set; }
+        public CreateAddressCommandResponse1 Address { get; set; }
         public OperationStatus Result { get; set; }
     }
 }

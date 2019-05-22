@@ -5,13 +5,12 @@ using RichObject.Domain.Models;
 
 namespace RichObject.Domain.Commands
 {
-    public class ChangeCurrentAddressCommand5I : IRequest<OperationResult<Unit>>
+    public class ChangeCustomerAddressCommand4 : IRequest<OperationResult<Unit>>
     {
         public Guid CustomerId { get; }
-        public Address5I Address { get; }
+        public Address4 Address { get; }
 
-        public ChangeCurrentAddressCommand5I(Guid customerId,
-            Address5I address)
+        public ChangeCustomerAddressCommand4(Guid customerId, Address4 address)
         {
             CustomerId = customerId;
             Address = address;

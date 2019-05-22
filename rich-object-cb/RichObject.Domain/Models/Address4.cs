@@ -4,7 +4,7 @@ using RichObject.Domain.Infrastructure;
 
 namespace RichObject.Domain.Models
 {
-    public class Address2
+    public class Address4
     {
         public string HouseNoOrName { get; }
         public string Street { get; }
@@ -12,7 +12,7 @@ namespace RichObject.Domain.Models
         public string County { get; }
         public string PostCode { get; }
 
-        private Address2(string houseNoOrName,
+        private Address4(string houseNoOrName,
             string street,
             string city,
             string county,
@@ -25,7 +25,7 @@ namespace RichObject.Domain.Models
             PostCode = postCode;
         }
 
-        public static Address2 Create(string houseNoOrName, 
+        public static OperationResult<Address4> Create(string houseNoOrName, 
             string street, 
             string city, 
             string county, 
@@ -33,11 +33,21 @@ namespace RichObject.Domain.Models
         {
             var errorMessages = new Dictionary<string, string>();
 
-            return new Address2(houseNoOrName,
+            if (string.IsNullOrEmpty(houseNoOrName)) errorMessages.Add(nameof(houseNoOrName), "Cannot be empty");
+            if (string.IsNullOrEmpty(street)) errorMessages.Add(nameof(street), "Cannot be empty");
+            if (string.IsNullOrEmpty(city) && string.IsNullOrEmpty(county))
+            {
+                errorMessages.Add($"{nameof(city)}{nameof(county)}", "Either city or country must be provided");
+            }
+
+            if (errorMessages.Any())
+                return OperationResult<Address4>.ValidationFailure(errorMessages);
+
+            return OperationResult<Address4>.Success(new Address4(houseNoOrName,
             street,
             city,
             county,
-            postCode);
+            postCode));
         }
     }
 }

@@ -12,4 +12,8 @@
     <ProjectReference Include="..\RichObject.Domain\RichObject.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
 </Project>

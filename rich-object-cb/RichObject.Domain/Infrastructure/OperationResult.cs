@@ -17,9 +17,24 @@ namespace RichObject.Domain.Infrastructure
             ErrorMessages = errorMessages;
             Value = value;
         }
+        private OperationResult(OperationStatus operationStatus, 
+            IDictionary<string, string> errorMessages, 
+            T value)
+        {
+            Status = operationStatus;
+//            ErrorMessages = errorMessages;
+            Value = value;
+        }
 
 
         public static OperationResult<T> ValidationFailure(IEnumerable<string> errorMessages)
+        {
+            return new OperationResult<T>(OperationStatus.ValidationFailure,
+                errorMessages,
+                default(T));
+            
+        }
+        public static OperationResult<T> ValidationFailure(IDictionary<string, string> errorMessages)
         {
             return new OperationResult<T>(OperationStatus.ValidationFailure,
                 errorMessages,

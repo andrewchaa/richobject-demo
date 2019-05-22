@@ -11,7 +11,7 @@ namespace RichObject.Domain.Commands
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Title { get; set; }
-        public IEnumerable<CreateAddressCommand3I> Addresses { get; set; }
+        public CreateAddressCommand1 Address { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string IdDocumentType { get; set; }
         public string IdDocumentNumber { get; set; }

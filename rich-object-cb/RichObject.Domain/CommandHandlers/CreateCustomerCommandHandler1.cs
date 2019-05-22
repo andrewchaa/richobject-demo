@@ -12,9 +12,9 @@ namespace RichObject.Domain.CommandHandlers
 {
     public class CreateCustomerCommandHandler1 : IRequestHandler<CreateCustomerCommand1, CreateCustomerCommandResponse1>
     {
-        private readonly ICustomerRepository3I _customerRepository;
+        private readonly ICustomerRepository1 _customerRepository;
 
-        public CreateCustomerCommandHandler1(ICustomerRepository3I customerRepository)
+        public CreateCustomerCommandHandler1(ICustomerRepository1 customerRepository)
         {
             _customerRepository = customerRepository;
         }

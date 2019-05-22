@@ -15,7 +15,7 @@ namespace RichObject.Api.Validators
             RuleFor(x => x.IdDocumentNumber).NotEmpty();
             RuleFor(x => x.IdDocumentType).NotEmpty();
             RuleFor(x => x.VatCountry).NotEmpty().When(x => !string.IsNullOrEmpty(x.VatNumber));
-            RuleFor(x => x.VatNumber).NotEmpty().When(x => !string.IsNullOrEmpty(x.VatCountry));
+            RuleFor(x => x.VatNumber).NotEmpty().When(x => x.VatCountry > 0);
 
             RuleFor(x => x.Address).SetValidator(new AddressValidator());
         }

@@ -1,17 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using RichObject.Domain.Infrastructure;
+using RichObject.Domain.Repositories;
 
 namespace RichObject.Domain.Models
 {
-    public class Customer2
+    public class Customer4
     {
+        private readonly IAddressRepository4 _addressRepository;
         public Guid CustomerId { get; }
         public string FirstName { get; }
         public string LastName { get; }
         public string MiddleName { get; }
         public string Title { get; }
-        public Address2 Address { get; }
-        public IEnumerable<Address2> Addresses { get; }
+        public Address3 Address { get; }
         public DateTime DateOfBirth { get; }
         public CountryCode CountryOfBirth { get; }
         public string IdDocumentType { get; }
@@ -19,12 +22,12 @@ namespace RichObject.Domain.Models
         public string VatNumber { get; }
         public CountryCode VatCountry { get; }
 
-        private Customer2(Guid customerId,
+        private Customer4(Guid customerId,
             string firstName,
             string lastName,
             string middleName,
             string title,
-            Address2 address,
+            Address3 address,
             DateTime dateOfBirth,
             CountryCode countryOfBirth,
             string idDocumentType,
@@ -46,20 +49,51 @@ namespace RichObject.Domain.Models
             VatCountry = vatCountry;
         }
 
-        public static Customer2 Create(Guid customerId,
+        private Customer4(Guid customerId,
+            string firstName,
+            string lastName,
+            string middleName,
+            string title,
+            Address3 address,
+            DateTime dateOfBirth,
+            CountryCode countryOfBirth,
+            string idDocumentType,
+            string idDocumentNumber,
+            string vatNumber,
+            CountryCode vatCountry, 
+            IAddressRepository4 addressRepository) : this(customerId, 
+            firstName, 
+            lastName, 
+            middleName, 
+            title, 
+            address, 
+            dateOfBirth, 
+            countryOfBirth, 
+            idDocumentType, 
+            idDocumentNumber, 
+            vatNumber, 
+            vatCountry)
+        {
+            _addressRepository = addressRepository;
+        }
+
+        public static OperationResult<Customer4> Create(Guid customerId,
             string firstName, 
             string lastName, 
             string middleName, 
             string title, 
-            Address2 address,
-            DateTime dateOfBirth, 
+            Address3 address,
+            DateTime dateOfBirth,
             CountryCode countryOfBirth, 
             string idDocumentType, 
             string idDocumentNumber, 
             string vatNumber,
-            CountryCode vatCountry)
+            CountryCode vatCountry,
+            IAddressRepository4 addressRepository
+            )
         {
-            return new Customer2(customerId, 
+
+            return OperationResult<Customer4>.Success(new Customer4(customerId, 
                 firstName, 
                 lastName,
                 middleName,
@@ -71,7 +105,12 @@ namespace RichObject.Domain.Models
                 idDocumentNumber,
                 vatNumber,
                 vatCountry
-                );
+                ));
+        }
+
+        public async Task ChangeAddress(Address4 address)
+        {
+            await _addressRepository.Update(address);
         }
     }
 }

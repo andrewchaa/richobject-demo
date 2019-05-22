@@ -23,8 +23,8 @@ namespace RichObject.Tests
             _factory = factory;
             _client = _factory.CreateClient();
 
-            _factory.CustomerRepository1I.Setup(c => c.Get(It.IsAny<Guid>()))
-                .ReturnsAsync(new Customer1I());
+//            _factory.CustomerRepository1I.Setup(c => c.Get(It.IsAny<Guid>()))
+//                .ReturnsAsync(new Customer1I());
 
         }
         

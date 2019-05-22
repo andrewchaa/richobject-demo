@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RichObject.Domain.Models
 {
@@ -12,5 +13,10 @@ namespace RichObject.Domain.Models
         public string IdDocumentType { get; set; }
         public string IdDocumentNumber { get; set; }
         public IEnumerable<AddressData1> Addresses { get; set; }
+
+        public async Task ChangeCustomerAddress(Address3 address)
+        {
+            
+        }
     }
 }

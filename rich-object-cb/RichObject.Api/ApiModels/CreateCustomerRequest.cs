@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using RichObject.Domain.Models;
 
 namespace RichObject.Api.ApiModels
 {
@@ -12,10 +13,10 @@ namespace RichObject.Api.ApiModels
         public string Title { get; set; }
         public AddressRequest Address { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public string CountryOfBirth { get; set; }
+        public CountryCode CountryOfBirth { get; set; }
         public string IdDocumentType { get; set; }
         public string IdDocumentNumber { get; set; }
         public string VatNumber { get; set; }
-        public string VatCountry { get; set; }
+        public CountryCode VatCountry { get; set; }
     }
 }

@@ -4,9 +4,9 @@ using RichObject.Domain.Models;
 
 namespace RichObject.Domain.Repositories
 {
-    public interface ICustomerRepository3I
+    public interface ICustomerRepository3
     {
         Task<CustomerData1> Get(Guid customerId);
-        Task<CustomerData1> Insert(CustomerData1 customerData);
+        Task<CustomerData1> Insert(Customer3 customerData);
     }
 }

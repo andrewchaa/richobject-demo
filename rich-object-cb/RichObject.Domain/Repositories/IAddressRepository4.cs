@@ -1,11 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using RichObject.Domain.Models;
 
 namespace RichObject.Domain.Repositories
 {
-    public interface ICustomerRepository1A
+    public interface IAddressRepository4
     {
-        Task<Customer1A> Get(Guid customerId);
+        Task Update(Address4 address);
     }
 }
