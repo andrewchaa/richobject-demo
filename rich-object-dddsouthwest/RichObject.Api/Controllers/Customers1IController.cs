@@ -1,8 +1,10 @@
 using System;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RichObject.Domain;
 using RichObject.Domain.Models;
+using RichObject.Domain.Queries;
 using RichObject.Domain.Repositories;
 
 namespace RichObject.Api.Controllers
@@ -15,18 +17,20 @@ namespace RichObject.Api.Controllers
     [Route("api/[controller]")]
     public class Customers1IController : Controller
     {
-        private readonly ICustomerRepository1I _customerRepository;
+        private readonly IMediator _mediator;
+        
 
-        public Customers1IController(ICustomerRepository1I customerRepository)
+        public Customers1IController(IMediator mediator, ICustomerRepository1I customerRepository)
         {
-            _customerRepository = customerRepository;
+            _mediator = mediator;
         }
         
         // GET
         [HttpGet("{id}")]
         public async Task<ActionResult<Customer1I>> Get(Guid id)
         {
-            var customer = await _customerRepository.Get(id);
+            var customer = _mediator.Send(new GetCustomerQuery1I(id));
+            
             return Ok(customer);
         }
     }
