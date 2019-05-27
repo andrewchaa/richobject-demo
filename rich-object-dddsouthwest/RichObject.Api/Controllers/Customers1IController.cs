@@ -7,6 +7,10 @@ using RichObject.Domain.Repositories;
 
 namespace RichObject.Api.Controllers
 {
+    /// <summary>
+    /// A single model coupled to Database and to API interface 
+    /// </summary>
+
     [ApiController]
     [Route("api/[controller]")]
     public class Customers1IController : Controller
