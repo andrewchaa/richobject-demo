@@ -12,18 +12,15 @@ using RichObject.Domain.Models;
 namespace RichObject.Api.Controllers
 {
     /// <summary>
-    /// Introduce Domain Model and let Command wrap it
-    /// Command Response DTO
-    /// Use of Mapper
-    /// Use of Validation Scripts
+    /// Pull validation logic into domain models
     /// </summary>
     [ApiController]
     [Route("api/[controller]")]
-    public class Customers2Controller : Controller
+    public class Customers3Controller : Controller
     {
         private readonly IMediator _mediator;
 
-        public Customers2Controller(IMediator mediator)
+        public Customers3Controller(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -37,19 +34,22 @@ namespace RichObject.Api.Controllers
             if (!result.IsValid)
                 return BadRequest(result.Errors);
 
-            var address = Address2.Create(request.Address.HouseNoOrName,
+            var addressResult = Address3.Create(request.Address.HouseNoOrName,
                 request.Address.Street,
                 request.Address.City,
                 request.Address.County,
                 request.Address.PostCode
             );
 
-            var customer = Customer2.Create(request.CustomerId, 
+            if (addressResult.Status == OperationStatus.ValidationFailure)
+                return BadRequest(addressResult.ErrorMessages);
+
+            var customerResult = Customer3.Create(request.CustomerId, 
                 request.FirstName,
                 request.LastName,
                 request.MiddleName,
                 request.Title,
-                address,
+                addressResult.Value,
                 request.DateOfBirth,
                 request.CountryOfBirth,
                 request.IdDocumentType,
@@ -57,11 +57,13 @@ namespace RichObject.Api.Controllers
                 request.VatNumber,
                 request.VatCountry);
 
-            // wrap customer domain model
-            var createCustomerCommand = new CreateCustomerCommand2(customer);
+            if (customerResult.Status == OperationStatus.ValidationFailure)
+                return BadRequest(customerResult.ErrorMessages);
+
 
             // command handler returns response that wraps domain model
-            var response = await _mediator.Send(createCustomerCommand);
+            var response = await _mediator.Send(new CreateCustomerCommand3(
+                customerResult.Value));
 
             if (response.Status == OperationStatus.ValidationFailure)
                 return BadRequest(response.ErrorMessages);

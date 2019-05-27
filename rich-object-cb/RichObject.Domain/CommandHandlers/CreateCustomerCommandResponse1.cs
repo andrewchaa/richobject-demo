@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RichObject.Domain.Commands;
+using RichObject.Domain.Infrastructure;
 using RichObject.Domain.Models;
 
 namespace RichObject.Domain.CommandHandlers
@@ -15,7 +16,7 @@ namespace RichObject.Domain.CommandHandlers
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Title { get; set; }
-        public IEnumerable<CreateAddressCommandResponseV4> Addresses { get; set; }
+        public CreateAddressCommandResponse1 Address { get; set; }
         public OperationStatus Result { get; set; }
     }
 }

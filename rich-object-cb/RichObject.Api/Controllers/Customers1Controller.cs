@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using RichObject.Api.ApiModels;
 using RichObject.Api.Validators;
 using RichObject.Domain.Commands;
+using RichObject.Domain.Infrastructure;
 
 namespace RichObject.Api.Controllers
 {
@@ -29,9 +30,12 @@ namespace RichObject.Api.Controllers
         
         // POST
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateCustomerRequest1 request)
+        public async Task<IActionResult> Post([FromBody] CreateCustomerRequest request)
         {
             var validator = new CreateCustomerValidator();
+            var result = validator.Validate(request);
+            if (!result.IsValid)
+                return BadRequest(result.Errors);
 
             // convert request DTO to command DTO
             var createCustomerCommand = Mapper.Map<CreateCustomerCommand1>(request);
