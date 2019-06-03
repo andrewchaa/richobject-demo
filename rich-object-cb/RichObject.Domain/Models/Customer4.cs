@@ -110,6 +110,10 @@ namespace RichObject.Domain.Models
 
         public async Task ChangeAddress(Address4 address)
         {
+            if (!Alive)
+            {
+                return OperationResult<Unit>.ValidationFailure("..")
+            }
             await _addressRepository.Update(address);
         }
     }

@@ -10,6 +10,7 @@ namespace RichObject.Domain.CommandHandlers
 {
     /// <summary>
     /// Validation that requires DB Check
+    /// Domain Model with Behaviour
     /// </summary>
     public class ChangeCustomerAddressCommandHandler4 : IRequestHandler<ChangeCustomerAddressCommand4, OperationResult<Unit>>
     {
@@ -27,7 +28,7 @@ namespace RichObject.Domain.CommandHandlers
             CancellationToken cancellationToken)
         {
             // repository factory
-            var customer = await _customerRepository.Get(command.CustomerId);
+            var customer = await _customerRepository.Get(command.CustomerId, _addressRepository);
             if (customer == null)
                 return OperationResult<Unit>.NotFound();
 
