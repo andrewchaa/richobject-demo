@@ -70,7 +70,7 @@ namespace RichObject.Api.Controllers
             if (response.Status == OperationStatus.ValidationFailure)
                 return BadRequest(response.ErrorMessages);
 
-            var customerApiResponse = Mapper.Map<CreateCustomerResponse3A>(response.Value);
+            var customerApiResponse = Mapper.Map<CreateCustomerResponse2A>(response.Value);
             if (response.Status == OperationStatus.Conflict)
             {
                 return Conflict(customerApiResponse);

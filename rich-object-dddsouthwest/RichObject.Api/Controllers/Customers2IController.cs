@@ -1,41 +1,54 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RichObject.Api.ApiModels;
 using RichObject.Domain;
+using RichObject.Domain.Commands;
 using RichObject.Domain.Models;
 using RichObject.Domain.Repositories;
 
 namespace RichObject.Api.Controllers
 {
+    /// <summary>
+    /// Local / Boundary DTOs Demo
+    /// </summary>
+    
     [ApiController]
     [Route("api/[controller]")]
     public class Customers2IController : Controller
     {
-        private readonly ICustomerRepository2I _customerRepository;
+        private readonly Mediator _mediator;
 
-        public Customers2IController(ICustomerRepository2I customerRepository)
+        public Customers2IController(Mediator mediator)
         {
-            _customerRepository = customerRepository;
+            _mediator = mediator;
         }
         
-        // GET
-        [HttpGet("{id}")]
-        public async Task<ActionResult<GetCustomerResponse1A>> Get(Guid id)
+        // POST
+        [HttpPost]
+        public async Task<ActionResult<Guid>> Post([FromBody] CustomerRequest2I customerRequest)
         {
-            var customerData = await _customerRepository.Get(id);
+            // from request DTO to command DTO
+            var createCustomerCommand = Mapper.Map<CreateCustomerCommand2I>(customerRequest);
             
-            // Often the repository is used in multiple places and you have to do the same conversion
-            // In stead of hurrying to use mapper, let's ask why we do the same thing in that many places 
-            var customer = Mapper.Map<Customer2I>(customerData);
-            
-            // sometimes, you skip the domain model and jump from data model to api response model
-            var customerResponse = Mapper.Map<GetCustomerResponseIss2>(customer);
-            
-            return Ok(customerResponse);
+            // from command DTO to command handler response DTO
+            var createCustomerCommandResponse = await _mediator.Send(createCustomerCommand);
+            if (createCustomerCommandResponse.ErrorType == ErrorType.ValidationError)
+                return BadRequest(createCustomerCommandResponse.ErrorMessages);
+
+            if (createCustomerCommandResponse.ErrorType == ErrorType.Conflict)
+            {
+                // conversion from command response DTO to API response dto
+                var customerConflictResponse = Mapper.Map<CreateCustomerApiResponse2I>(createCustomerCommandResponse);
+                return Conflict(customerConflictResponse);
+            }
+
+            // conversion from command response DTO to API response dto
+            var createCustomerApiResponse = Mapper.Map<CreateCustomerApiResponse2I>(createCustomerCommandResponse);
+            return Ok(createCustomerApiResponse);
         }
     }
 }

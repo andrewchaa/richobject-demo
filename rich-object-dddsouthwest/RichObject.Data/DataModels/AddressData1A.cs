@@ -1,6 +1,6 @@
 namespace RichObject.Data.DataModels
 {
-    public class AddressDataAns1
+    public class AddressData1A
     {
         public bool CurrentAddress { get; set; }
         public string HouseNoOrName { get; set; }

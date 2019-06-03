@@ -6,7 +6,7 @@ using RichObject.Domain.CommandHandlers;
 
 namespace RichObject.Domain.Commands
 {
-    public class CreateCustomerCommand3I : IRequest<CreateCustomerCommandResponse3I>
+    public class CreateCustomerCommand2I : IRequest<CreateCustomerCommandResponse2I>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

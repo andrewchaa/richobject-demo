@@ -5,7 +5,7 @@ using RichObject.Domain.Models;
 
 namespace RichObject.Domain.CommandHandlers
 {
-    public class CreateCustomerCommandResponse3I
+    public class CreateCustomerCommandResponse2I
     {
         public IEnumerable<string> ErrorMessages { get; set; }
         public bool Success { get; set; }

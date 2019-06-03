@@ -16,9 +16,20 @@ namespace RichObject.Data.Repositories
             throw new NotImplementedException();
         }
 
-        Task<CustomerData3I> ICustomerRepository3I.Get(Guid customerId)
+        public async Task<CustomerData2I> Get(Guid customerId)
         {
-            throw new NotImplementedException();
+            using (var conn = new SqlConnection())
+            {
+                var customerData = await conn.QuerySingleOrDefaultAsync<CustomerData2I>(
+                    "SELECT * FROM Customers WHERE CustomerId = @customerId",
+                    new {customerId});
+                customerData.Addresses = await conn.QueryAsync<AddressData2I>(
+                    "SELECT * FROM Addresses WHERE Customer",
+                    new {customerId});
+
+                return customerData;
+            }
         }
+
     }
 }

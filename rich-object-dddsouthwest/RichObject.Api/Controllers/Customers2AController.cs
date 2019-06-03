@@ -18,21 +18,21 @@ namespace RichObject.Api.Controllers
     
     [ApiController]
     [Route("api/[controller]")]
-    public class Customers3AController : Controller
+    public class Customers2AController : Controller
     {
         private readonly IMediator _mediator;
 
-        public Customers3AController(IMediator mediator)
+        public Customers2AController(IMediator mediator)
         {
             _mediator = mediator;
         }
         
         // POST
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CustomerRequestAns3 customerRequest)
+        public async Task<IActionResult> Post([FromBody] CustomerRequest2A customerRequest)
         {
             // convert request DTO to domain model
-            var customer = new Customer3A(customerRequest.FirstName,
+            var customer = new Customer2A(customerRequest.FirstName,
                 customerRequest.LastName,
                 customerRequest.Title,
                 customerRequest.DateOfBirth,
@@ -47,14 +47,14 @@ namespace RichObject.Api.Controllers
                     )));
             
             // command just wrap domain model
-            var createCustomerCommand = new CreateCustomerCommand3A(customer);
+            var createCustomerCommand = new CreateCustomerCommand2A(customer);
             
             // command handler returns response that wraps domain model
             var response = await _mediator.Send(createCustomerCommand);
             if (response.Status == OperationStatus.ValidationFailure)
                 return BadRequest(response.ErrorMessages);
 
-            var customerApiResponse = Mapper.Map<CreateCustomerResponse3A>(response.Value);
+            var customerApiResponse = Mapper.Map<CreateCustomerResponse2A>(response.Value);
             if (response.Status == OperationStatus.Conflict)
             {
                 return Conflict(customerApiResponse);
