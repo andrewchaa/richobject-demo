@@ -11,6 +11,11 @@ namespace RichObject.Data.Repositories
 {
     public class CustomerRepository2I : ICustomerRepository2I
     {
+        public Task<CustomerData2I> Insert(CustomerData2I customerData)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<CustomerData2I> Get(Guid customerId)
         {
             using (var conn = new SqlConnection())
@@ -25,5 +30,6 @@ namespace RichObject.Data.Repositories
                 return customerData;
             }
         }
+
     }
 }

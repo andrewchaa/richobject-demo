@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using RichObject.Api.ApiModels;
 using RichObject.Domain;
 using RichObject.Domain.Commands;
+using RichObject.Domain.Infrastructure;
 using RichObject.Domain.Models;
 using RichObject.Domain.Repositories;
 

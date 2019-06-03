@@ -6,9 +6,11 @@ namespace RichObject.Domain.Repositories
 {
     public interface ICustomerRepository2I
     {
+        Task<CustomerData2I> Insert(CustomerData2I customerData);
+
         Task<CustomerData2I> Get(Guid customerId);
     }
-
+    
     public class CustomerData2I
     {
         public string FirstName { get; set; }
@@ -29,4 +31,5 @@ namespace RichObject.Domain.Repositories
         public string County { get; set; }
         public string PostCode { get; set; }
     }
+
 }

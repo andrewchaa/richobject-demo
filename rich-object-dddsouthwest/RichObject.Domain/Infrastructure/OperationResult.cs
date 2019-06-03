@@ -1,13 +1,7 @@
-using System;
-using System.Buffers;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using RichObject.Domain.Models;
+using OperationStatus = RichObject.Domain.Infrastructure.OperationStatus;
 
-namespace RichObject.Domain.Commands
+namespace RichObject.Domain.Infrastructure
 {
     public class OperationResult<T>
     {

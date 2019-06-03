@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using RichObject.Domain.Commands;
+using RichObject.Domain.Infrastructure;
 using RichObject.Domain.Repositories;
 
 namespace RichObject.Domain.CommandHandlers

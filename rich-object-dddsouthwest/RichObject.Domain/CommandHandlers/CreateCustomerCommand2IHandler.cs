@@ -10,12 +10,12 @@ using RichObject.Domain.Repositories;
 
 namespace RichObject.Domain.CommandHandlers
 {
-    public class CreateCustomerCommandHandler3I : 
+    public class CreateCustomerCommand2IHandler : 
         IRequestHandler<CreateCustomerCommand2I, CreateCustomerCommandResponse2I>
     {
-        private readonly ICustomerRepository3I _customerRepository;
+        private readonly ICustomerRepository2I _customerRepository;
 
-        public CreateCustomerCommandHandler3I(ICustomerRepository3I customerRepository)
+        public CreateCustomerCommand2IHandler(ICustomerRepository2I customerRepository)
         {
             _customerRepository = customerRepository;
         }
@@ -41,7 +41,7 @@ namespace RichObject.Domain.CommandHandlers
                 return response;
             }
 
-            var customerData = Mapper.Map<CustomerData3I>(command);
+            var customerData = Mapper.Map<CustomerData2I>(command);
             await _customerRepository.Insert(customerData);
 
             response = Mapper.Map<CreateCustomerCommandResponse2I>(customerData);

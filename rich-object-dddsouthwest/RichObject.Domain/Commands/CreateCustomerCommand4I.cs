@@ -1,5 +1,6 @@
 using System;
 using MediatR;
+using RichObject.Domain.Infrastructure;
 using RichObject.Domain.Models;
 
 namespace RichObject.Domain.Commands

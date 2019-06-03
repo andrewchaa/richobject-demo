@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using RichObject.Api.ApiModels;
 using RichObject.Domain;
 using RichObject.Domain.Commands;
+using RichObject.Domain.Infrastructure;
 using RichObject.Domain.Models;
+using RichObject.Domain.Queries;
 using RichObject.Domain.Repositories;
 
 namespace RichObject.Api.Controllers
@@ -50,5 +52,18 @@ namespace RichObject.Api.Controllers
             var createCustomerApiResponse = Mapper.Map<CreateCustomerApiResponse2I>(createCustomerCommandResponse);
             return Ok(createCustomerApiResponse);
         }
+        
+        // GET
+        [HttpGet("{id}")]
+        public async Task<ActionResult<GetCustomerResponse1A>> Get(Guid id)
+        {
+            var getCustomerQueryResponse = await _mediator.Send(new GetCustomerQuery2I(id));
+            if (getCustomerQueryResponse.Status == OperationStatus.NotFound)
+                return NotFound();
+
+            var apiResponse = Mapper.Map<GetCustomerApiResponse2I>(getCustomerQueryResponse);
+            return Ok(apiResponse);
+        }
+        
     }
 }

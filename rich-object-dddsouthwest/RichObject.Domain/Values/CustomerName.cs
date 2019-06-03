@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using RichObject.Domain.Commands;
+using RichObject.Domain.Infrastructure;
 
 namespace RichObject.Domain.Values
 {

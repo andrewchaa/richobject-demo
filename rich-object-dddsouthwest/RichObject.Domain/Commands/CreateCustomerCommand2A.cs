@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using MediatR;
 using RichObject.Domain.CommandHandlers;
+using RichObject.Domain.Infrastructure;
 using RichObject.Domain.Models;
 
 namespace RichObject.Domain.Commands
