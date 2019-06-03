@@ -1,30 +1,31 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RichObject.Api.ApiModels;
 using RichObject.Domain;
+using RichObject.Domain.Queries;
 using RichObject.Domain.Repositories;
 
 namespace RichObject.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-
     public class Customers1AController : Controller
     {
-        private readonly ICustomerRepository1A _customerRepository;
+        private readonly IMediator _mediator;
 
-        public Customers1AController(ICustomerRepository1A customerRepository)
+        public Customers1AController(IMediator mediator, ICustomerRepository1A customerRepository)
         {
-            _customerRepository = customerRepository;
+            _mediator = mediator;
         }
         
         // GET
         [HttpGet("{id}")]
         public async Task<ActionResult<GetCustomerResponse1A>> Get(Guid id)
         {
-            var customer = await _customerRepository.Get(id);
+            var customer = await _mediator.Send(new GetCustomerQuery1A(id));
 
             var currentAddress = customer.Addresses.Single(a => a.CurrentAddress);
             var customerResponse = new GetCustomerResponse1A

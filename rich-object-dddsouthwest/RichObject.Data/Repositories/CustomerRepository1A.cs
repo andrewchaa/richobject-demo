@@ -10,7 +10,7 @@ using RichObject.Domain.Repositories;
 
 namespace RichObject.Data.Repositories
 {
-    public class CustomerRepositoryAns1 : ICustomerRepository1A
+    public class CustomerRepository1A : ICustomerRepository1A
     {
         public async Task<Customer1A> Get(Guid customerId)
         {

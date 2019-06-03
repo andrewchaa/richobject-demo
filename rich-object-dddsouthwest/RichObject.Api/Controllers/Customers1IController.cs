@@ -20,7 +20,7 @@ namespace RichObject.Api.Controllers
         private readonly IMediator _mediator;
         
 
-        public Customers1IController(IMediator mediator, ICustomerRepository1I customerRepository)
+        public Customers1IController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -29,7 +29,7 @@ namespace RichObject.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Customer1I>> Get(Guid id)
         {
-            var customer = _mediator.Send(new GetCustomerQuery1I(id));
+            var customer = await _mediator.Send(new GetCustomerQuery1I(id));
             
             return Ok(customer);
         }
