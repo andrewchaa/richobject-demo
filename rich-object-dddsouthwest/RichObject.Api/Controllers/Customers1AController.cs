@@ -33,7 +33,7 @@ namespace RichObject.Api.Controllers
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
                 Title = customer.Title,
-                CurrentAddress = new AddressResponse 
+                CurrentAddress = new AddressResponse1A 
                 {
                     HouseNoOrName = currentAddress.HouseNoOrName,
                     Street = currentAddress.Street,
@@ -42,7 +42,7 @@ namespace RichObject.Api.Controllers
                     PostCode = currentAddress.PostCode
                 }, 
                 PastAddresses =  customer.Addresses.Where(a => !a.CurrentAddress)
-                    .Select(a => new AddressResponse
+                    .Select(a => new AddressResponse1A
                 {
                     HouseNoOrName = a.HouseNoOrName,
                     Street = a.Street,

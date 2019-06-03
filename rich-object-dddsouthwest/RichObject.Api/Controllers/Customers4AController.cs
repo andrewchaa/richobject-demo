@@ -55,7 +55,7 @@ namespace RichObject.Api.Controllers
                 nameResponse.Value,
                 dobResponse.Value,
                 idDocumentResponse.Value,
-                request.Addresses.Select(a => new Address3A(a.HouseNoOrName,
+                request.Addresses.Select(a => new Address2A(a.HouseNoOrName,
                     a.Street,
                     a.City,
                     a.County,

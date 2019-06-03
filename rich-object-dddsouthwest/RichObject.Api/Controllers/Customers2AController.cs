@@ -5,11 +5,10 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RichObject.Api.ApiModels;
-using RichObject.Domain;
 using RichObject.Domain.Commands;
 using RichObject.Domain.Infrastructure;
 using RichObject.Domain.Models;
-using RichObject.Domain.Repositories;
+using RichObject.Domain.Queries;
 
 namespace RichObject.Api.Controllers
 {
@@ -28,6 +27,19 @@ namespace RichObject.Api.Controllers
             _mediator = mediator;
         }
         
+        // GET
+        [HttpGet("{id}")]
+        public async Task<ActionResult<GetCustomerApiResponse2A>> Get(Guid id)
+        {
+            var queryResult = await _mediator.Send(new GetCustomerQuery2A(id));
+            if (queryResult.Status == OperationStatus.NotFound)
+                return NotFound();
+
+            var apiResponse = new GetCustomerApiResponse2A(queryResult.Value);
+            return Ok(apiResponse);
+        }
+
+        
         // POST
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CustomerRequest2A customerRequest)
@@ -39,7 +51,7 @@ namespace RichObject.Api.Controllers
                 customerRequest.DateOfBirth,
                 customerRequest.IdDocumentType,
                 customerRequest.IdDocumentNumber,
-                customerRequest.Addresses.Select(a => new Address3A(a.HouseNoOrName,
+                customerRequest.Addresses.Select(a => new Address2A(a.HouseNoOrName,
                     a.Street,
                     a.City,
                     a.County,

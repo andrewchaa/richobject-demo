@@ -8,10 +8,10 @@ namespace RichObject.Api.ApiModels
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Title { get; set; }
-        public IEnumerable<AddressResponse> PastAddresses { get; set; }
+        public IEnumerable<AddressResponse1A> PastAddresses { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string IdDocumentType { get; set; }
         public string IdDocumentNumber { get; set; }
-        public AddressResponse CurrentAddress { get; set; }
+        public AddressResponse1A CurrentAddress { get; set; }
     }
 }

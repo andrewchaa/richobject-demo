@@ -55,7 +55,7 @@ namespace RichObject.Api.Controllers
                 request.DateOfBirth,
                 request.IdDocumentType,
                 request.IdDocumentNumber,
-                request.Addresses.Select(a => new Address3A(a.HouseNoOrName,
+                request.Addresses.Select(a => new Address2A(a.HouseNoOrName,
                     a.Street,
                     a.City,
                     a.County,
