@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RichObject.Api.ApiModels
 {
-    public class CustomerRequest4A
+    public class CustomerRequest3A
     {
         public Guid CustomerId { get; set; }
         public string FirstName { get; set; }

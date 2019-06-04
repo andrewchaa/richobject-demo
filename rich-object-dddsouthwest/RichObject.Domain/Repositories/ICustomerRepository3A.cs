@@ -4,10 +4,10 @@ using RichObject.Domain.Models;
 
 namespace RichObject.Domain.Repositories
 {
-    public interface ICustomerRepository4A
+    public interface ICustomerRepository3A
     {
         Task<Customer1A> Get(Guid customerId);
-        Task<Guid> Save(Customer4A customer);
+        Task<Guid> Save(Customer3A customer);
         Task<bool> Exist(Guid customerCustomerId);
     }
 }

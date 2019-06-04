@@ -8,17 +8,17 @@ using RichObject.Domain.Repositories;
 
 namespace RichObject.Domain.CommandHandlers
 {
-    public class CreateCustomerCommandHandler4A : IRequestHandler<CreateCustomerCommand4A, 
+    public class CreateCustomerCommand3AHandler : IRequestHandler<CreateCustomerCommand3A, 
         OperationResult<Guid>>
     {
-        private readonly ICustomerRepository4A _customerRepository;
+        private readonly ICustomerRepository3A _customerRepository;
 
-        public CreateCustomerCommandHandler4A(ICustomerRepository4A customerRepository)
+        public CreateCustomerCommand3AHandler(ICustomerRepository3A customerRepository)
         {
             _customerRepository = customerRepository;
         }
         
-        public async Task<OperationResult<Guid>> Handle(CreateCustomerCommand4A command, 
+        public async Task<OperationResult<Guid>> Handle(CreateCustomerCommand3A command, 
             CancellationToken cancellationToken)
         {
             var exist = await _customerRepository.Exist(command.Customer.CustomerId);

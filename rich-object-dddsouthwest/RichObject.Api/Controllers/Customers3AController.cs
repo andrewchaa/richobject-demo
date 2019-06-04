@@ -21,41 +21,41 @@ namespace RichObject.Api.Controllers
     
     [ApiController]
     [Route("api/[controller]")]
-    public class Customers4AController : Controller
+    public class Customers3AController : Controller
     {
         private readonly Mediator _mediator;
 
-        public Customers4AController(Mediator mediator)
+        public Customers3AController(Mediator mediator)
         {
             _mediator = mediator;
         }
         
         // POST
         [HttpPost]
-        public async Task<ActionResult<Guid>> Post([FromBody] CustomerRequest4A request)
+        public async Task<ActionResult<Guid>> Post([FromBody] CustomerRequest3A request)
         {
             // value objects validate their inputs
-            var nameResponse = CustomerName.Create(request.Title,
+            var nameResult = CustomerName.Create(request.Title,
                 request.FirstName,
                 request.LastName);
-            if (nameResponse.Status == OperationStatus.ValidationFailure)
-                return BadRequest(nameResponse.ErrorMessages);
+            if (nameResult.Status == OperationStatus.ValidationFailure)
+                return BadRequest(nameResult.ErrorMessages);
 
-            var dobResponse = Dob.Create(request.DateOfBirth);
-            if (dobResponse.Status == OperationStatus.ValidationFailure)
-                return BadRequest(dobResponse.ErrorMessages);
+            var dobResult = Dob.Create(request.DateOfBirth);
+            if (dobResult.Status == OperationStatus.ValidationFailure)
+                return BadRequest(dobResult.ErrorMessages);
 
-            var idDocumentResponse = IdDocument.Create(request.IdDocumentType,
+            var idDocumentResult = IdDocument.Create(request.IdDocumentType,
                 request.IdDocumentNumber);
-            if (idDocumentResponse.Status == OperationStatus.ValidationFailure)
-                return BadRequest(idDocumentResponse.ErrorMessages);
+            if (idDocumentResult.Status == OperationStatus.ValidationFailure)
+                return BadRequest(idDocumentResult.ErrorMessages);
             
             // convert request DTO to domain model
-            var customer = new Customer4A(request.CustomerId,
-                nameResponse.Value,
-                dobResponse.Value,
-                idDocumentResponse.Value,
-                request.Addresses.Select(a => new Address2A(a.HouseNoOrName,
+            var customer = new Customer3A(request.CustomerId,
+                nameResult.Value,
+                dobResult.Value,
+                idDocumentResult.Value,
+                request.Addresses.Select(a => new Address3A(a.HouseNoOrName,
                     a.Street,
                     a.City,
                     a.County,
@@ -64,9 +64,9 @@ namespace RichObject.Api.Controllers
                 )));
             
             // command just wrap domain model
-            var response = await _mediator.Send(new CreateCustomerCommand4A(customer));
+            var response = await _mediator.Send(new CreateCustomerCommand3A(customer));
 
-            var apiResponse = Mapper.Map<CreateCustomerApiResponse2A>(response.Value);
+            var apiResponse = new CreateCustomerApiResponse3A(response.Value);
             if (response.Status == OperationStatus.Conflict)
             {
                 return Conflict(apiResponse);
