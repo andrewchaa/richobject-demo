@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace RichObject.Api.ApiModels
 {
-    public class CustomerRequest4I
+    public class CreateCustomerRequest3I
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Title { get; set; }
-        public IEnumerable<AddressRequest4I> Addresses { get; set; }
+        public IEnumerable<AddressRequest3I> Addresses { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string IdDocumentType { get; set; }
         public string IdDocumentNumber { get; set; }

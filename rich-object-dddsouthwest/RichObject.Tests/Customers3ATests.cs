@@ -60,7 +60,7 @@ namespace RichObject.Tests
         [Fact]
         public async Task Should_creat_a_new_customer()
         {
-            var request = new CustomerRequest2A
+            var request = new CreateCustomerRequest2A
             {
                 FirstName = "firstName",
                 LastName = "lastName",

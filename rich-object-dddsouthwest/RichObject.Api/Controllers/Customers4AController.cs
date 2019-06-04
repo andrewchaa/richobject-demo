@@ -66,7 +66,7 @@ namespace RichObject.Api.Controllers
             // command just wrap domain model
             var response = await _mediator.Send(new CreateCustomerCommand4A(customer));
 
-            var apiResponse = Mapper.Map<CreateCustomerResponse2A>(response.Value);
+            var apiResponse = Mapper.Map<CreateCustomerApiResponse2A>(response.Value);
             if (response.Status == OperationStatus.Conflict)
             {
                 return Conflict(apiResponse);

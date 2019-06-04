@@ -42,16 +42,16 @@ namespace RichObject.Api.Controllers
         
         // POST
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CustomerRequest2A customerRequest)
+        public async Task<IActionResult> Post([FromBody] CreateCustomerRequest2A createCustomerRequest)
         {
             // convert request DTO to domain model
-            var customer = new Customer2A(customerRequest.FirstName,
-                customerRequest.LastName,
-                customerRequest.Title,
-                customerRequest.DateOfBirth,
-                customerRequest.IdDocumentType,
-                customerRequest.IdDocumentNumber,
-                customerRequest.Addresses.Select(a => new Address2A(a.HouseNoOrName,
+            var customer = new Customer2A(createCustomerRequest.FirstName,
+                createCustomerRequest.LastName,
+                createCustomerRequest.Title,
+                createCustomerRequest.DateOfBirth,
+                createCustomerRequest.IdDocumentType,
+                createCustomerRequest.IdDocumentNumber,
+                createCustomerRequest.Addresses.Select(a => new Address2A(a.HouseNoOrName,
                     a.Street,
                     a.City,
                     a.County,
@@ -67,7 +67,7 @@ namespace RichObject.Api.Controllers
             if (response.Status == OperationStatus.ValidationFailure)
                 return BadRequest(response.ErrorMessages);
 
-            var customerApiResponse = Mapper.Map<CreateCustomerResponse2A>(response.Value);
+            var customerApiResponse = new CreateCustomerApiResponse2A(response.Value);
             if (response.Status == OperationStatus.Conflict)
             {
                 return Conflict(customerApiResponse);

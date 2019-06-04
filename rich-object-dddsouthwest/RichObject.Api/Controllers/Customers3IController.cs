@@ -6,11 +6,9 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RichObject.Api.ApiModels;
-using RichObject.Domain;
 using RichObject.Domain.Commands;
 using RichObject.Domain.Infrastructure;
 using RichObject.Domain.Models;
-using RichObject.Domain.Repositories;
 
 namespace RichObject.Api.Controllers
 {
@@ -20,18 +18,18 @@ namespace RichObject.Api.Controllers
     
     [ApiController]
     [Route("api/[controller]")]
-    public class Customers4IController : Controller
+    public class Customers3IController : Controller
     {
         private readonly Mediator _mediator;
 
-        public Customers4IController(Mediator mediator)
+        public Customers3IController(Mediator mediator)
         {
             _mediator = mediator;
         }
         
         // POST
         [HttpPost]
-        public async Task<ActionResult<Guid>> Post([FromBody] CustomerRequest4I request)
+        public async Task<ActionResult<Guid>> Post([FromBody] CreateCustomerRequest3I request)
         {
             // validation script
             var errorMessages = new List<string>();
@@ -49,13 +47,13 @@ namespace RichObject.Api.Controllers
             
             
             // convert request DTO to domain model
-            var customer = new Customer4I(request.FirstName,
+            var customer = new Customer3I(request.FirstName,
                 request.LastName,
                 request.Title,
                 request.DateOfBirth,
                 request.IdDocumentType,
                 request.IdDocumentNumber,
-                request.Addresses.Select(a => new Address2A(a.HouseNoOrName,
+                request.Addresses.Select(a => new Address3I(a.HouseNoOrName,
                     a.Street,
                     a.City,
                     a.County,
@@ -64,14 +62,14 @@ namespace RichObject.Api.Controllers
                 )));
             
             // command just wrap domain model
-            var createCustomerCommand = new CreateCustomerCommand4I(customer);
+            var createCustomerCommand = new CreateCustomerCommand3I(customer);
             
             // command handler returns response that wraps domain model
             var response = await _mediator.Send(createCustomerCommand);
             if (response.Status == OperationStatus.ValidationFailure)
                 return BadRequest(response.ErrorMessages);
 
-            var customerApiResponse = Mapper.Map<CreateCustomerResponse2A>(response.Value);
+            var customerApiResponse = Mapper.Map<CreateCustomerApiResponse2A>(response.Value);
             if (response.Status == OperationStatus.Conflict)
             {
                 return Conflict(customerApiResponse);

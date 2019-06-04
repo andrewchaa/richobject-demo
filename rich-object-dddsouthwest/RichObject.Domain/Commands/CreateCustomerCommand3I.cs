@@ -5,11 +5,11 @@ using RichObject.Domain.Models;
 
 namespace RichObject.Domain.Commands
 {
-    public class CreateCustomerCommand4I : IRequest<OperationResult<Guid>>
+    public class CreateCustomerCommand3I : IRequest<OperationResult<Guid>>
     {
-        public Customer4I Customer { get; }
+        public Customer3I Customer { get; }
 
-        public CreateCustomerCommand4I(Customer4I customer)
+        public CreateCustomerCommand3I(Customer3I customer)
         {
             Customer = customer;
         }
