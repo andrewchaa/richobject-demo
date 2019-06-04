@@ -67,7 +67,7 @@ namespace RichObject.Api.Controllers
             if (response.Status == OperationStatus.ValidationFailure)
                 return BadRequest(response.ErrorMessages);
 
-            var customerApiResponse = new CreateCustomerApiResponse2A(response.Value);
+            var customerApiResponse = new CreateCustomerApiResponse2A(response.Value.CustomerId);
             if (response.Status == OperationStatus.Conflict)
             {
                 return Conflict(customerApiResponse);

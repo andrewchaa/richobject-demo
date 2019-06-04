@@ -69,13 +69,13 @@ namespace RichObject.Api.Controllers
             if (response.Status == OperationStatus.ValidationFailure)
                 return BadRequest(response.ErrorMessages);
 
-            var customerApiResponse = Mapper.Map<CreateCustomerApiResponse2A>(response.Value);
+            var apiResponse = new CreateCustomerApiResponse3I(response.Value);
             if (response.Status == OperationStatus.Conflict)
             {
-                return Conflict(customerApiResponse);
+                return Conflict(apiResponse);
             }
             
-            return Created($"/customers/customer/{customerApiResponse.CustomerId}", customerApiResponse);
+            return Created($"/customers/customer/{apiResponse.CustomerId}", apiResponse);
         }
     }
 }

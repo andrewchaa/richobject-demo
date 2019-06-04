@@ -3,11 +3,10 @@ using RichObject.Domain.Models;
 
 namespace RichObject.Api.ApiModels
 {
-    public class CreateCustomerApiResponse2A
+    public class CreateCustomerApiResponse3I
     {
         public Guid CustomerId { get; }
-
-        public CreateCustomerApiResponse2A(Guid customerId)
+        public CreateCustomerApiResponse3I(Guid customerId)
         {
             CustomerId = customerId;
         }
