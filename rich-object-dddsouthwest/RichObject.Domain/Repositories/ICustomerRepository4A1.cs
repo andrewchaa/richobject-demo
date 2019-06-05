@@ -12,12 +12,4 @@ namespace RichObject.Domain.Repositories
         Task<bool> Exist(Guid customerCustomerId);
         Task<Guid> SaveAddresses(Customer4A1 customer);
     }
-
-    public interface ICustomerAddressRepository4A2
-    {
-        Task<Customer4A1> Get(Guid customerId);
-        Task<Guid> Save(Customer4A1 customer);
-        Task<bool> Exist(Guid customerCustomerId);
-        Task<Guid> SaveAddresses(Customer4A1 customer);
-    }
 }

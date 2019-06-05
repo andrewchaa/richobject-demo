@@ -14,7 +14,7 @@ using RichObject.Domain.Values;
 
 namespace RichObject.Data.Repositories
 {
-    public class CustomerRepository5A : ICustomerRepository4A
+    public class CustomerRepository4A : ICustomerRepository4A
     {
         public async Task<Customer4A> Get(Guid customerId)
         {

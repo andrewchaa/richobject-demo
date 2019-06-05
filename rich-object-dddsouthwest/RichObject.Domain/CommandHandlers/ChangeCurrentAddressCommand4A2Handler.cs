@@ -11,25 +11,23 @@ namespace RichObject.Domain.CommandHandlers
     public class ChangeCurrentAddressCommand4A2Handler : 
         IRequestHandler<ChangeCurrentAddressCommand4A, OperationResult<Unit>>
     {
-        private readonly ICustomerRepository4A1 _customerRepository;
+        private readonly ICustomerAddressRepository4A2 _customerAddressRepository;
 
-        public ChangeCurrentAddressCommand4A2Handler(ICustomerRepository4A1 customerRepository,
-            IAddressRepository4A addressRepository)
+        public ChangeCurrentAddressCommand4A2Handler(ICustomerAddressRepository4A2 customerAddressRepository)
         {
-            _customerRepository = customerRepository;
+            _customerAddressRepository = customerAddressRepository;
         }
         
         public async Task<OperationResult<Unit>> Handle(ChangeCurrentAddressCommand4A command, 
             CancellationToken cancellationToken)
         {
             // repository factory
-            var customer = await _customerRepository.Get(command.CustomerId);
-            if (customer == null)
+            var customerAddress = await _customerAddressRepository.Get(command.CustomerId);
+            if (customerAddress == null)
                 return OperationResult<Unit>.NotFound();
 
-            customer.ChangeCurrentAddress(command.Address);
-            await _customerRepository.SaveAddresses(customer);
-            
+            customerAddress.ChangeCurrentAddress(command.Address);
+            await _customerAddressRepository.Save(customerAddress);
             
             return OperationResult<Unit>.Success(Unit.Value);
         }
