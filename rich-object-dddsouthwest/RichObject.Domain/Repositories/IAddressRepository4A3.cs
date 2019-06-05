@@ -5,7 +5,7 @@ using RichObject.Domain.Models;
 
 namespace RichObject.Domain.Repositories
 {
-    public interface IAddressRepository4A
+    public interface IAddressRepository4A3
     {
         Task<IEnumerable<Address4A>> List(Guid customerId);
         Task Insert(Address4A address);

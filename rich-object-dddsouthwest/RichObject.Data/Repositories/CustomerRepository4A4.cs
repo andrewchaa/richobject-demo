@@ -1,3 +1,5 @@
+
+
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -5,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Dapper;
+using MediatR;
 using RichObject.Data.DataModels;
 using RichObject.Domain;
 using RichObject.Domain.Infrastructure;
@@ -14,15 +17,29 @@ using RichObject.Domain.Values;
 
 namespace RichObject.Data.Repositories
 {
-    public class CustomerRepository4A : ICustomerRepository4A3
+    public class CustomerRepository4A4 : ICustomerRepository4A4
     {
-        public async Task<Customer4A> Get(Guid customerId)
+        private readonly IMediator _mediator;
+
+        public CustomerRepository4A4(IMediator mediator)
         {
-            return await Get(customerId, default(IAddressRepository4A3));
+            _mediator = mediator;
         }
 
-        public async Task<Customer4A> Get(Guid customerId, 
-            IAddressRepository4A3 addressRepository)
+        public async Task<Guid> Save(Customer4A4 customer)
+        {
+            // Save Customer
+            // ...
+            // ...
+            foreach (var command in customer.Commands)
+            {
+                await _mediator.Send(command);
+            }
+
+            return Guid.NewGuid();
+        }
+
+        public async Task<Customer4A4> Get(Guid customerId)
         {
             using (var conn = new SqlConnection())
             {
@@ -48,23 +65,13 @@ namespace RichObject.Data.Repositories
                     a.PostCode,
                     a.CurrentAddress).Value);
                 
-                return new Customer4A(customerData.CustomerId,
+                return new Customer4A4(customerData.CustomerId,
                     nameResult.Value,
                     dobResult.Value,
                     idDocumentResult.Value,
-                    addresses,
-                    addressRepository);
+                    addresses);
             }
         }
 
-        public async Task<Guid> Save(Customer4A customer)
-        {
-            return Guid.NewGuid();
-        }
-
-        public async Task<bool> Exist(Guid customerCustomerId)
-        {
-            return true;
-        }
     }
 }

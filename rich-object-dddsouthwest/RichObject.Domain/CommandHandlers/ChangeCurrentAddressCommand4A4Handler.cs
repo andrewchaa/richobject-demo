@@ -8,13 +8,13 @@ using RichObject.Domain.Repositories;
 
 namespace RichObject.Domain.CommandHandlers
 {
-    public class ChangeCurrentAddressCommand4A1Handler : 
+    public class ChangeCurrentAddressCommand4A4Handler : 
         IRequestHandler<ChangeCurrentAddressCommand4A, OperationResult<Unit>>
     {
-        private readonly ICustomerRepository4A1 _customerRepository;
+        private readonly ICustomerRepository4A4 _customerRepository;
 
-        public ChangeCurrentAddressCommand4A1Handler(ICustomerRepository4A1 customerRepository,
-            IAddressRepository4A3 addressRepository)
+        public ChangeCurrentAddressCommand4A4Handler(ICustomerRepository4A4 customerRepository,
+            IMediator mediator)
         {
             _customerRepository = customerRepository;
         }
@@ -28,7 +28,7 @@ namespace RichObject.Domain.CommandHandlers
                 return OperationResult<Unit>.NotFound();
 
             customer.ChangeCurrentAddress(command.Address);
-            await _customerRepository.SaveAddresses(customer);
+            await _customerRepository.Save(customer);
             
             
             return OperationResult<Unit>.Success(Unit.Value);

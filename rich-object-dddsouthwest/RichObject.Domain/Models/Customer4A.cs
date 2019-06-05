@@ -15,7 +15,7 @@ namespace RichObject.Domain.Models
         public Dob DateOfBirth { get; }
         public IdDocument IdDocument { get; }
 
-        private readonly IAddressRepository4A _addressRepository;
+        private readonly IAddressRepository4A3 _addressRepository;
 
         public Customer4A(Guid customerId,
             CustomerName name, 
@@ -35,7 +35,7 @@ namespace RichObject.Domain.Models
             Dob dateOfBirth, 
             IdDocument idDocument, 
             IEnumerable<Address4A> addresses, 
-            IAddressRepository4A addressRepository) : this(customerId,
+            IAddressRepository4A3 addressRepository) : this(customerId,
             name,
             dateOfBirth,
             idDocument,

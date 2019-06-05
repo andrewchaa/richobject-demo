@@ -11,11 +11,11 @@ namespace RichObject.Domain.CommandHandlers
     public class ChangeCurrentAddressCommand4A3Handler : 
         IRequestHandler<ChangeCurrentAddressCommand4A, OperationResult<Unit>>
     {
-        private readonly ICustomerRepository4A _customerRepository;
-        private readonly IAddressRepository4A _addressRepository;
+        private readonly ICustomerRepository4A3 _customerRepository;
+        private readonly IAddressRepository4A3 _addressRepository;
 
-        public ChangeCurrentAddressCommand4A3Handler(ICustomerRepository4A customerRepository,
-            IAddressRepository4A addressRepository)
+        public ChangeCurrentAddressCommand4A3Handler(ICustomerRepository4A3 customerRepository,
+            IAddressRepository4A3 addressRepository)
         {
             _customerRepository = customerRepository;
             _addressRepository = addressRepository;
