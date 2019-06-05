@@ -2,77 +2,62 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Dapper;
+using RichObject.Data.DataModels;
 using RichObject.Domain;
+using RichObject.Domain.Infrastructure;
 using RichObject.Domain.Models;
 using RichObject.Domain.Repositories;
+using RichObject.Domain.Values;
 
 namespace RichObject.Data.Repositories
 {
-    public class CustomerRepository5A : ICustomerRepository5A
+    public class CustomerRepository5A : ICustomerRepository4A
     {
-        public async Task<Customer5A> Get(Guid customerId)
+        public async Task<Customer4A> Get(Guid customerId)
         {
-            using (var conn = new SqlConnection())
-            {
-                var customerData = await conn.QuerySingleOrDefaultAsync<CustomerData5A>(
-                    "SELECT * FROM Customers WHERE CustomerId = @customerId",
-                    new {customerId});
-                var addressesData = await conn.QueryAsync<AddressData5A>(
-                    "SELECT * FROM Addresses WHERE Customer",
-                    new {customerId});
-
-                var addresses = addressesData.Select(a => new Address1A(a.HouseNoOrName,
-                    a.Street,
-                    a.City,
-                    a.County,
-                    a.PostCode,
-                    a.CurrentAddress));
-                
-                return new Customer5A(customerData.CustomerId,
-                    customerData.FirstName,
-                    customerData.LastName,
-                    customerData.Title,
-                    customerData.DateOfBirth,
-                    customerData.IdDocumentType,
-                    customerData.IdDocumentNumber,
-                    addresses);
-            }
+            return await Get(customerId, default(IAddressRepository4A));
         }
 
-        public async Task<Customer5A> Get(Guid customerId, 
-            IAddressRepository5A addressRepository)
+        public async Task<Customer4A> Get(Guid customerId, 
+            IAddressRepository4A addressRepository)
         {
             using (var conn = new SqlConnection())
             {
-                var customerData = await conn.QuerySingleOrDefaultAsync<CustomerData5A>(
+                var customerData = await conn.QuerySingleOrDefaultAsync<CustomerData4A>(
                     "SELECT * FROM Customers WHERE CustomerId = @customerId",
                     new {customerId});
-                var addressesData = await conn.QueryAsync<AddressData5A>(
+                var addressesData = await conn.QueryAsync<AddressData4A>(
                     "SELECT * FROM Addresses WHERE Customer",
                     new {customerId});
 
-                var addresses = addressesData.Select(a => new Address1A(a.HouseNoOrName,
+                var nameResult = CustomerName.Create(customerData.Title,
+                    customerData.FirstName,
+                    customerData.LastName);
+                var dobResult = Dob.Create(customerData.DateOfBirth);
+                var idDocumentResult = IdDocument.Create(customerData.IdDocumentType,
+                    customerData.IdDocumentNumber);
+                
+                var addresses = addressesData.Select(a => Address4A.Create(a.AddressId,
+                    a.HouseNoOrName,
                     a.Street,
                     a.City,
                     a.County,
                     a.PostCode,
-                    a.CurrentAddress));
+                    a.CurrentAddress).Value);
                 
-                return new Customer5A(customerData.CustomerId,
-                    customerData.FirstName,
-                    customerData.LastName,
-                    customerData.Title,
-                    customerData.DateOfBirth,
-                    customerData.IdDocumentType,
-                    customerData.IdDocumentNumber,
+                return new Customer4A(customerData.CustomerId,
+                    nameResult.Value,
+                    dobResult.Value,
+                    idDocumentResult.Value,
                     addresses,
                     addressRepository);
             }
         }
 
-        public async Task<Guid> Save(Customer5A customer)
+        public async Task<Guid> Save(Customer4A customer)
         {
             return Guid.NewGuid();
         }
@@ -82,27 +67,4 @@ namespace RichObject.Data.Repositories
             return true;
         }
     }
-    
-    public class CustomerData5A
-    {
-        public Guid CustomerId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Title { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public string IdDocumentType { get; set; }
-        public string IdDocumentNumber { get; set; }
-    }
-    
-    public class AddressData5A
-    {
-        public bool CurrentAddress { get; set; }
-        public string HouseNoOrName { get; set; }
-        public string Street { get; set; }
-        public string City { get; set; }
-        public string County { get; set; }
-        public string PostCode { get; set; }
-    }
-
-
 }

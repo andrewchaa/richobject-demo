@@ -17,21 +17,21 @@ namespace RichObject.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class Customers5AController : Controller
+    public class Customers4AController : Controller
     {
         private readonly Mediator _mediator;
 
-        public Customers5AController(Mediator mediator)
+        public Customers4AController(Mediator mediator)
         {
             _mediator = mediator;
         }
         
         [HttpPut("{customerId}/currentAddress")]
         public async Task<IActionResult> Put([FromRoute]Guid customerId, 
-            [FromBody] AddressRequest5I request)
+            [FromBody] AddressRequest4A request)
         {
             // value objects validate their inputs
-            var addressResult = Address5A.Create(Guid.NewGuid(), 
+            var addressResult = Address4A.Create(Guid.NewGuid(), 
                 request.HouseNoOrName,
                 request.Street,
                 request.City,
@@ -43,7 +43,7 @@ namespace RichObject.Api.Controllers
                 return BadRequest(addressResult.ErrorMessages);
 
             // command handler owns the business logic that updates the customer's current address
-            var response = await _mediator.Send(new ChangeCurrentAddressCommand5A(customerId,
+            var response = await _mediator.Send(new ChangeCurrentAddressCommand4A(customerId,
                 addressResult.Value));
             if (response.Status == OperationStatus.NotFound)
                 return NotFound(customerId);

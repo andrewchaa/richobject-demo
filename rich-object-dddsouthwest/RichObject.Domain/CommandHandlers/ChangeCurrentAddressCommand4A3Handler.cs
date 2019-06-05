@@ -8,20 +8,20 @@ using RichObject.Domain.Repositories;
 
 namespace RichObject.Domain.CommandHandlers
 {
-    public class ChangeCurrentAddressCommandHandler5A : 
-        IRequestHandler<ChangeCurrentAddressCommand5A, OperationResult<Unit>>
+    public class ChangeCurrentAddressCommand4A3Handler : 
+        IRequestHandler<ChangeCurrentAddressCommand4A, OperationResult<Unit>>
     {
-        private readonly ICustomerRepository5A _customerRepository;
-        private readonly IAddressRepository5A _addressRepository;
+        private readonly ICustomerRepository4A _customerRepository;
+        private readonly IAddressRepository4A _addressRepository;
 
-        public ChangeCurrentAddressCommandHandler5A(ICustomerRepository5A customerRepository,
-            IAddressRepository5A addressRepository)
+        public ChangeCurrentAddressCommand4A3Handler(ICustomerRepository4A customerRepository,
+            IAddressRepository4A addressRepository)
         {
             _customerRepository = customerRepository;
             _addressRepository = addressRepository;
         }
         
-        public async Task<OperationResult<Unit>> Handle(ChangeCurrentAddressCommand5A command, 
+        public async Task<OperationResult<Unit>> Handle(ChangeCurrentAddressCommand4A command, 
             CancellationToken cancellationToken)
         {
             // repository factory

@@ -12,13 +12,13 @@ namespace RichObject.Domain.Models
         public Dob DateOfBirth { get; }
         public IdDocument IdDocument { get; }
 
-        public Customer3A(Guid CustomerId,
+        public Customer3A(Guid customerId,
             CustomerName name, 
             Dob dateOfBirth, 
             IdDocument idDocument, 
             IEnumerable<Address3A> addresses)
         {
-            this.CustomerId = CustomerId;
+            CustomerId = customerId;
             Name = name;
             DateOfBirth = dateOfBirth;
             IdDocument = idDocument;

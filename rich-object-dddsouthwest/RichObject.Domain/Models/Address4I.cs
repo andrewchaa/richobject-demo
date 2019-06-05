@@ -6,7 +6,7 @@ using RichObject.Domain.Infrastructure;
 
 namespace RichObject.Domain.Models
 {
-    public class Address5I
+    public class Address4I
     {
         public Guid AddressId { get; }
         public string HouseNoOrName { get; }
@@ -16,7 +16,7 @@ namespace RichObject.Domain.Models
         public string PostCode { get; }
         public bool CurrentAddress { get; private set; }
 
-        private Address5I(Guid addressId, 
+        private Address4I(Guid addressId, 
             string houseNoOrName, 
             string street, 
             string city, 
@@ -38,7 +38,7 @@ namespace RichObject.Domain.Models
             CurrentAddress = isCurrentAddress;
         }
 
-        public static OperationResult<Address5I> Create(Guid addressId,
+        public static OperationResult<Address4I> Create(Guid addressId,
             string houseNoOrName, 
             string street, 
             string city, 
@@ -57,9 +57,9 @@ namespace RichObject.Domain.Models
                 errorMessages.Add($"{nameof(postCode)} is empty");
 
             if (errorMessages.Any())
-                return OperationResult<Address5I>.ValidationFailure(errorMessages);
+                return OperationResult<Address4I>.ValidationFailure(errorMessages);
 
-            return OperationResult<Address5I>.Success(new Address5I(addressId, 
+            return OperationResult<Address4I>.Success(new Address4I(addressId, 
                 houseNoOrName,
                 street,
                 city,
